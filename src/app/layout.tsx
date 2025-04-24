@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={sans.className}>
         <AuthProvider>
           <Header />
-          {children}
+          <main className="flex">
+            {children}
+          </main>
         </AuthProvider>
       </body>
     </html>
