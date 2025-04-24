@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Montserrat_Alternates } from "next/font/google"
 import { Header } from "./components/ui/header"
 import { AuthProvider } from "./providers"
+import '@/app/globals.css'
 
 const sans = Montserrat_Alternates({
   subsets: ["cyrillic"], 
