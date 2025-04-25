@@ -127,7 +127,7 @@ export const Hero = () => {
                         <Link href="/test" className="w-full sm:w-auto">
                             <button
                                 className="w-full px-10 py-5 bg-transparent border-2 border-white text-white hover:bg-white hover:text-black rounded-full text-2xl font-bold transition-all transform hover:scale-105">
-                                Пройти тест
+                                Личный кабинет
                             </button>
                         </Link>
                     </div>

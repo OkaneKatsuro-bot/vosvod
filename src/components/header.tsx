@@ -99,7 +99,7 @@ export const Header = () => {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="text-gray-500 hover:bg-gray-100 rounded-full"
+                            className="text-gray-600 hover:bg-gray-100 rounded-full"
                             aria-label="Поиск"
                         >
                             <Search className="h-4 w-4"/>
@@ -164,7 +164,7 @@ export const Header = () => {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="md:hidden text-gray-500 hover:bg-gray-100 rounded-full"
+                            className="md:hidden text-gray-600 hover:bg-gray-100 rounded-full"
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Меню"
                         >
@@ -206,7 +206,7 @@ export const Header = () => {
                                             setIsOpen(false)
                                         }}
                                         variant="outline"
-                                        className="w-full py-3"
+                                        className="w-full py-3 text-gray-700"
                                     >
                                         Войти
                                     </Button>
