@@ -7,10 +7,7 @@ import {
   CalendarIcon,
   DocumentTextIcon,
   CreditCardIcon,
-  LifebuoyIcon,
-  XMarkIcon
 } from '@heroicons/react/24/outline';
-import { Anchor } from 'lucide-react';
 
 const Footer = () => {
   const [currentYear, setCurrentYear] = useState('2024');
