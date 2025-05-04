@@ -2,6 +2,7 @@ import type {Metadata} from "next"
 import {Montserrat_Alternates} from "next/font/google"
 import {Header} from "@/components/header"
 import '@/app/globals.css'
+import Footer from "@/components/footer"
 
 const sans = Montserrat_Alternates({
     subsets: ["cyrillic"],
@@ -25,6 +26,7 @@ export default function RootLayout({
         <main>
             {children}
         </main>
+        <Footer/>
         </body>
         </html>
     )
