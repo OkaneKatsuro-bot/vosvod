@@ -52,30 +52,30 @@ const RescueImage = ({ src }: { src: string }) => (
 
 const rescueItems = [
   {
-    title: "Спасательные катера",
-    description: "Скоростные суда для экстренного реагирования",
+    title: "Wellboat -51",
+    description: "",
     header: <RescueImage src="/rescue-boats.jpg" />,
     imageUrl: "/Wellboat-51.jpg",
   },
   {
-    title: "Аварийное снаряжение",
-    description: "Специальное оборудование для работы в ЧС",
+    title: "Гидроцикл Polaris",
+    description: "",
     imageUrl: "/Polaris.jpg",
   },
   {
-    title: "Медицинские модули",
-    description: "Мобильные комплексы для оказания первой помощи",
+    title: "Аэробот STEL",
+    description: "",
     header: <RescueImage src="/medical-module.jpg" />,
     imageUrl: "/Stel.png",
   },
   {
-    title: "Системы навигации",
+    title: "Судно на воздушной подушке CHRISTY 6143",
     description: "Современное оборудование для поисковых операций",
     header: <RescueImage src="/navigation-system.jpg" />,
     imageUrl: "/Christy6143.jpg",
   },
   {
-    title: "Поддержка 24/7",
+    title: "Крейсерская парусная яхта PINTO",
     description: "Круглосуточная готовность к выезду",
     header: <RescueImage src="/support-team.jpg" />,
     imageUrl: "/yacht.jpg",
