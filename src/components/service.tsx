@@ -13,12 +13,12 @@ export function ThreeDCardDemo() {
     {
       title: "City Lights",
       description: "Experience the vibrant energy of metropolitan nightlife.",
-      imageUrl: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      imageUrl: "2-2-768x645.jpeg"
     },
     {
       title: "Mountain Adventure",
       description: "Conquer the highest peaks and enjoy breathtaking views.",
-      imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      imageUrl: "2-2-768x645.jpeg"
     },
     {
       title: "Beach Paradise",
