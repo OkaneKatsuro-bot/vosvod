@@ -16,7 +16,6 @@ export default function Home() {
                 <VOSVODCards/>
                 <RescueBentoGrid/>
                 <BridgeTeamRescuers/>
-                <Footer/>
             </main>
         </>
     )

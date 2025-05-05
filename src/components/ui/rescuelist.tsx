@@ -7,7 +7,7 @@ interface Rescuer {
   id: string;
   fullName: string;
   position: string;
-  experience: string;
+  education?: string;
   qualifications: string[];
   imageUrl: string;
 }
@@ -18,60 +18,59 @@ export default function BridgeTeamRescuers() {
   const rescuers: Rescuer[] = [
     {
       id: "1",
-      fullName: "Иванов Алексей Петрович",
-      position: "Капитан-спасатель",
-      experience: "15 лет",
-      qualifications: ["Мастер спорта по водному туризму", "Эксперт по навигации", "Сертифицированный водолаз"],
-      imageUrl: "/rescuer1.jpg"
+      fullName: "Кочетов Даниил Юрьевич",
+      position: "Директор, преподаватель (инструктор)",
+      education: "Высшее",
+      qualifications: ["Судоводитель маломерного судна", "Спасатель Российской Федерации"],
+      imageUrl: "/флот1.jpg"
     },
     // Добавлены новые члены команды
     {
       id: "2",
-      fullName: "Смирнова Елена Владимировна",
-      position: "Старший помощник",
-      experience: "12 лет",
-      qualifications: ["Специалист по радиосвязи", "Инструктор по выживанию", "Медицинский работник"],
-      imageUrl: "/rescuer2.jpg"
+      fullName: "Поляков Вячеслав Анатольевич",
+      position: "Преподаватель (инструктор), инструктор тренажерной подготовки, экзаменатор",
+      education: "Высшее",
+      qualifications: ["Моторист 1-го класса", "Боцман", "Судоводитель маломерного судна"],
+      imageUrl: "/флот2.jpg"
     },
     {
       id: "3",
-      fullName: "Кузнецов Дмитрий Игоревич",
-      position: "Штурман-спасатель",
-      experience: "10 лет",
-      qualifications: ["Эксперт по метеорологии", "Специалист по ГИС", "Инструктор по первой помощи"],
-      imageUrl: "/rescuer3.jpg"
+      fullName: "Соловьев Алексей Викторович",
+      position: "Преподаватель (инструктор), инструктор тренажерной подготовки, экзаменатор",
+      education: "Высшее",
+      qualifications: ["Капитан", "Оператор ГМССБ", "Судоводитель  маломерного судна", "Радиолокационное наблюдение и прокладка", "Специалист по спасательным шлюпкам и плотам, дежурным шлюпкам (таблица А-VI/2-1)"],
+      imageUrl: "/флот3.jpg"
     },
     {
       id: "4",
-      fullName: "Петров Андрей Сергеевич",
-      position: "Боцман",
-      experience: "8 лет",
-      qualifications: ["Специалист по такелажу", "Водолаз 3-й категории", "Инструктор по ремонту судов"],
-      imageUrl: "/rescuer4.jpg"
+      fullName: "Курлов Валерий Петрович",
+      position: "Преподаватель (инструктор), преподаватель практической  подготовки на парусные суда",
+      education: "Высшее",
+      qualifications: ["Яхтенный капитан без ограничений парусности и района плавания", "Судоводитель парусно-моторного судна", "Радиолокационное наблюдение и прокладка"],
+      imageUrl: "/флот4.jpg"
     },
     {
       id: "5",
-      fullName: "Васильева Ольга Игоревна",
-      position: "Радист",
-      experience: "6 лет",
-      qualifications: ["Эксперт связи", "Оператор спутниковых систем", "Криптограф"],
-      imageUrl: "/rescuer5.jpg"
+      fullName: "Росляков Виктор Сергеевич",
+      position: "Преподаватель (инструктор), инструктор тренажерной подготовки, экзаменатор",
+      qualifications: ["Судоводитель маломерного судна", "Спасатель Российской  Федерации", "Международный инструктор по спасанию на воде ILS", "Инструктор тренажере морской радиосвязи прибрежного плавания ГМССБ в рамках применения технического средства обучения для тренажерной подготовки судоводителей по одобренным программам подготовки", "Инструктор комплексного навигационном тренажере «CNM-2014» в рамках применения технического средства обучения для тренажерной подготовки судоводителей по одобренным программам подготовки" ],
+      imageUrl: "/флот5.jpg"
     },
     {
       id: "6",
-      fullName: "Николаев Максим Викторович",
-      position: "Медик",
-      experience: "9 лет",
-      qualifications: ["Хирург", "Специалист по гипербарической медицине", "Парамедик"],
-      imageUrl: "/rescuer6.jpg"
+      fullName: "Латыпов Артем Фаритович",
+      position: "Преподаватель (инструктор), инструктор тренажерной подготовки, экзаменатор",
+      education: "Высшее",
+      qualifications: ["Спасатель Российской Федерации", "Судоводитель маломерного  маломерным судна", "Водолаз 6 разряда", "Руководитель водолазных спусков", "Инструктор- водолаз", "Международный водолаз Commercial Divers International CDI", "Инструктор-тренер  International Liaison Committee on Resuscitation (ILCOR), Emergency First Response (EFR), Basic life support (BLS), Diving Medicine Shore Based First Responder,  PADI (Professional Association of Diving Instructors), CMAS (Всемирная конфедерация подводной деятельности)","Международный инструктор  по спасанию на воде ILS (International Life Saving Federation), подводной деятельности)"],
+      imageUrl: "/флот6.jpg"
     },
     {
       id: "7",
-      fullName: "Федорова Анна Дмитриевна",
-      position: "Инженер",
-      experience: "11 лет",
-      qualifications: ["Судовой механик", "Эксперт по аварийным системам", "Электрик"],
-      imageUrl: "/rescuer7.jpg"
+      fullName: "Малышева Мария Витальевна",
+      position: "Преподаватель (инструктор), инструктор тренажерной подготовки, экзаменатор Сведения о квалификации и образовании",
+      education: "Высшее",
+      qualifications: ["Спасатель Российской Федерации", "Международный инструктор  по спасанию на воде ILS (International Life Saving Federation), подводной деятельности)", "Судоводитель маломерного  маломерным судна", "Инструктор тренажере морской радиосвязи прибрежного плавания ГМССБ в рамках применения технического средства обучения для тренажерной подготовки судоводителей по одобренным программам подготовки", "Инструктор комплексного навигационном тренажере «CNM-2014» в рамках применения технического средства обучения для тренажерной подготовки судоводителей по одобренным программам подготовки"],
+      imageUrl: "/флот7.jpg",
     }
   ];
 
@@ -97,7 +96,11 @@ export default function BridgeTeamRescuers() {
                   src={rescuer.imageUrl}
                   alt={rescuer.fullName}
                   fill
-                  className="object-cover"
+                  className="h-full w-full object-cover object-top"
+                  style={{ 
+                    transform: 'translateZ(0)', // Для оптимизации рендеринга
+                    backfaceVisibility: 'hidden' // Исправление артефактов в некоторых браузерах
+                  }}
                 />
                 <div className="absolute inset-0 bg-blue-900/30"></div>
               </div>
@@ -108,7 +111,7 @@ export default function BridgeTeamRescuers() {
                   <span className="font-semibold">Должность:</span> {rescuer.position}
                 </p>
                 <p className="text-blue-200 mb-4">
-                  <span className="font-semibold">Опыт:</span> {rescuer.experience}
+                  <span className="font-semibold">Образование:</span> {rescuer.education}
                 </p>
                 
                 <button

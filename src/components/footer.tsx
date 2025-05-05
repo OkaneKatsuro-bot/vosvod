@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
             <img 
-                src="/Rectangle.png" 
+                src="/logo-vosvod.png" 
                 alt="Логотип ВОСВОД" 
                 className="w-12 h-12 object-contain" // Настраиваем размеры
               />

@@ -25,7 +25,7 @@ export function RescueBentoGrid() {
       </div>
 
       {/* Bento Grid на весь экран */}
-      <div className="flex-1 w-full px-4">
+      <div className="flex-1 w-full px-4 pb-12">
         <BentoGrid className="max-w-7xl mx-auto h-full">
           {rescueItems.map((item, i) => (
             <BentoGridItem

@@ -53,87 +53,67 @@ export function ThreeDCardDemo() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0a1a2f] py-12">
-      {/* Красный матросский круг с восходом */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="relative h-[600px] w-[600px] animate-spin-slow">
-          {/* Большой восход (ореол) - теперь шире и краснее */}
-          <div className="absolute inset-0 rounded-full bg-[#FD1D03]/10 shadow-[0_0_80px_30px_rgba(253,29,3,0.4)]" />
-          
-          {/* Концентрические круги - сделаны шире */}
-          <div className="absolute inset-0 rounded-full border-[6px] border-[#FD1D03]/40" />
-          <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[5px] border-[#FD1D03]/50" />
-          <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[4px] border-[#FD1D03]/60" />
-          
-          {/* Центральная точка - увеличена */}
-          <div className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FD1D03] shadow-xl shadow-[#FD1D03]/60" />
-          
-          {/* Текст по кругу - обновлен цвет */}
-          <div className="absolute left-1/2 top-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2">
-            <svg viewBox="0 0 600 600" className="w-full h-full">
-              <defs>
-                <path
-                  id="circlePath"
-                  d="M300,300 m-250,0 a250,250 0 1,1 500,0 a250,250 0 1,1 -500,0"
-                />
-              </defs>
-              <text fill="#FD1D03" fontSize="28" fontFamily="Arial" fontWeight="bold">
-                <textPath xlinkHref="#circlePath" startOffset="0%">
-                  • УЧЕБНЫЙ ЦЕНТР • ВСЕРОССИЙСКОЕ ОБЩЕСТВО СПАСАТЕЛЕЙ НА ВОДАХ •
-                </textPath>
-              </text>
-            </svg>
+    <div className="relative w-full min-h-screen overflow-hidden bg-[#0a1a2f] py-12">
+      {/* Контент */}
+      <section className="relative z-10 w-full min-h-screen py-20">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <div className="w-full text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+              Наши программы
+            </h2>
+            <p className="text-xl sm:text-2xl text-gray-300">
+              Выберите подходящий курс и начните обучение
+            </p>
+          </div>
+
+          {/* Сетка карточек */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cardsData.map((card, index) => (
+              <CardContainer key={index} className="inter-var">
+                <CardBody className="bg-black/40 backdrop-blur-lg relative group/card hover:shadow-2xl hover:shadow-blue-500/20 border-white/20 w-full h-full rounded-xl p-6 border">
+                  <CardItem
+                    translateZ="50"
+                    className="text-2xl font-bold text-blue-400"
+                  >
+                    {card.title}
+                  </CardItem>
+                  <CardItem
+                    as="p"
+                    translateZ="60"
+                    className="text-gray-300 text-sm mt-4"
+                  >
+                    {card.description}
+                  </CardItem>
+                  <CardItem translateZ="100" className="w-full mt-6">
+                    <img
+                      src={card.imageUrl}
+                      className="h-48 w-full object-cover rounded-lg group-hover/card:shadow-xl border border-white/20"
+                      alt={card.title}
+                    />
+                  </CardItem>
+                  <div className="flex justify-between items-center mt-8">
+                    <CardItem
+                      translateZ={20}
+                      as="a"
+                      href="#"
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-blue-400 hover:bg-blue-500/10 transition-colors"
+                    >
+                      Подробнее →
+                    </CardItem>
+                    <CardItem
+                      translateZ={20}
+                      as="button"
+                      className="px-6 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
+                    >
+                      Выбрать
+                    </CardItem>
+                  </div>
+                </CardBody>
+              </CardContainer>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Сетка карточек - обновлены цвета на #FD1D03 */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 p-4 w-full max-w-7xl mx-auto">
-        {cardsData.map((card, index) => (
-          <CardContainer key={index} className="inter-var">
-            <CardBody className="bg-[#0a2342] relative group/card hover:shadow-2xl hover:shadow-[#FD1D03]/20 border-[#FD1D03]/40 w-full h-full rounded-xl p-4 border-2">
-              <CardItem
-                translateZ="50"
-                className="text-lg font-bold text-[#FD1D03]"
-              >
-                {card.title}
-              </CardItem>
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-[#f8a48a] text-xs max-w-sm mt-2"
-              >
-                {card.description}
-              </CardItem>
-              <CardItem translateZ="100" className="w-full mt-2">
-                <img
-                  src={card.imageUrl}
-                  className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl border border-[#FD1D03]/40"
-                  alt={card.title}
-                />
-              </CardItem>
-              <div className="flex justify-between items-center mt-8">
-                <CardItem
-                  translateZ={20}
-                  as="a"
-                  href="#"
-                  className="px-3 py-1 rounded-xl text-xs font-normal text-[#FD1D03] hover:bg-[#FD1D03]/10 transition-colors"
-                >
-                  Подробнее →
-                </CardItem>
-                <CardItem
-                  translateZ={20}
-                  as="button"
-                  className="px-3 py-1 rounded-xl bg-[#FD1D03] text-white text-xs font-bold hover:bg-[#D01803] transition-colors"
-                >
-                  Выбрать
-                </CardItem>
-              </div>
-            </CardBody>
-          </CardContainer>
-        ))}
-      </div>
+      </section>
     </div>
   );
-
 }

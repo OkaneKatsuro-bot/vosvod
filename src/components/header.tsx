@@ -50,7 +50,7 @@ export const Header = () => {
                             <div
                                 className="w-16 h-16 rounded-full border-2 border-blue-600/30 group-hover:border-blue-600 transition-all flex items-center justify-center bg-gray-50">
                                 <Image
-                                    src="/Rectangle.png"
+                                    src="/logo-vosvod.png"
                                     alt="Логотип"
                                     width={64}
                                     height={64}
