@@ -1,13 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import {
-  IconLifebuoy,
-  IconAlertTriangle,
-  IconShieldCheck,
-  IconShip,
-  IconHeartbeat
-} from "@tabler/icons-react";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
+import Image from "next/image";
 
 export function RescueBentoGrid() {
   return (
@@ -32,8 +26,7 @@ export function RescueBentoGrid() {
               key={i}
               title={item.title}
               description={item.description}
-              header={item.header}
-              icon={item.icon}
+              imageUrl={item.imageUrl} // Добавлен новый пропс
               className={cn(
                 "border-2 border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-500",
                 i === 3 ? "md:col-span-2" : ""
@@ -46,39 +39,45 @@ export function RescueBentoGrid() {
   );
 }
 
-const RescueSkeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-900"></div>
+const RescueImage = ({ src }: { src: string }) => (
+  <div className="relative flex-1 w-full h-full min-h-[8rem] rounded-xl overflow-hidden">
+    <Image
+      src={src}
+      alt=""
+      fill
+      className="object-cover"
+    />
+  </div>
 );
 
 const rescueItems = [
   {
     title: "Спасательные катера",
     description: "Скоростные суда для экстренного реагирования",
-    header: <RescueSkeleton />,
-    icon: <IconShip className="h-6 w-6 text-blue-600 dark:text-blue-300" />,
+    header: <RescueImage src="/rescue-boats.jpg" />,
+    imageUrl: "/Wellboat-51.jpg",
   },
   {
     title: "Аварийное снаряжение",
     description: "Специальное оборудование для работы в ЧС",
-    header: <RescueSkeleton />,
-    icon: <IconShieldCheck className="h-6 w-6 text-blue-600 dark:text-blue-300" />,
+    imageUrl: "/Polaris.jpg",
   },
   {
     title: "Медицинские модули",
     description: "Мобильные комплексы для оказания первой помощи",
-    header: <RescueSkeleton />,
-    icon: <IconHeartbeat className="h-6 w-6 text-blue-600 dark:text-blue-300" />,
+    header: <RescueImage src="/medical-module.jpg" />,
+    imageUrl: "/Stel.png",
   },
   {
     title: "Системы навигации",
     description: "Современное оборудование для поисковых операций",
-    header: <RescueSkeleton />,
-    icon: <IconAlertTriangle className="h-6 w-6 text-blue-600 dark:text-blue-300" />,
+    header: <RescueImage src="/navigation-system.jpg" />,
+    imageUrl: "/Christy6143.jpg",
   },
   {
     title: "Поддержка 24/7",
     description: "Круглосуточная готовность к выезду",
-    header: <RescueSkeleton />,
-    icon: <IconLifebuoy className="h-6 w-6 text-blue-600 dark:text-blue-300" />,
+    header: <RescueImage src="/support-team.jpg" />,
+    imageUrl: "/yacht.jpg",
   },
 ];
