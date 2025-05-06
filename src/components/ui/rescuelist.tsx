@@ -15,6 +15,11 @@ interface Rescuer {
 export default function BridgeTeamRescuers() {
   const [expandedRescuer, setExpandedRescuer] = useState<string | null>(null);
 
+    // Добавленная функция
+    const toggleDetails = (id: string) => {
+      setExpandedRescuer(prev => prev === id ? null : id);
+    };
+
   const rescuers: Rescuer[] = [
     {
       id: "1",
@@ -74,59 +79,63 @@ export default function BridgeTeamRescuers() {
     }
   ];
 
-  const toggleDetails = (id: string) => {
-    setExpandedRescuer(expandedRescuer === id ? null : id);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-950 py-12 px-4">
+    <div className="min-h-screen to-gray-950 py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-white">
-          <span className="border-b-2 border-blue-400 pb-2">Команда спасателей мостика</span>
+        <h2 className="text-4xl font-bold text-center mb-12 text-white">
+          <span className="relative inline-block">
+            <span className="absolute inset-x-0 bottom-0 h-1 bg-blue-500 w-full"></span>
+            <span className="relative">Команда спасателей мостика</span>
+          </span>
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
           {rescuers.map((rescuer) => (
             <div 
               key={rescuer.id}
-              className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border-2 border-blue-400/30 hover:border-blue-400/50 transition-all duration-300"
+              className="h-full bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col shadow-lg hover:shadow-blue-500/20"
             >
-              <div className="relative h-64 w-full">
-                <Image
-                  src={rescuer.imageUrl}
-                  alt={rescuer.fullName}
-                  fill
-                  className="h-full w-full object-cover object-top"
-                  style={{ 
-                    transform: 'translateZ(0)', // Для оптимизации рендеринга
-                    backfaceVisibility: 'hidden' // Исправление артефактов в некоторых браузерах
-                  }}
-                />
-                <div className="absolute inset-0 bg-blue-900/30"></div>
-              </div>
-              
-              <div className="p-6">
+              <div className="relative aspect-square w-full overflow-hidden">
+  <Image
+    src={rescuer.imageUrl}
+    alt={rescuer.fullName}
+    fill
+    className="object-cover grayscale-[15%] brightness-105 contrast-125"
+    style={{ 
+      transform: 'translateZ(0)',
+      backfaceVisibility: 'hidden'
+    }}
+    priority={false}
+  />
+  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 rounded-xl z-0" />
+</div>        
+              <div className="p-6 flex flex-col flex-1 bg-gray-800/80">
                 <h3 className="text-xl font-bold text-white mb-2">{rescuer.fullName}</h3>
-                <p className="text-blue-200 mb-1">
-                  <span className="font-semibold">Должность:</span> {rescuer.position}
+                <p className="text-gray-300 mb-2">
+                  <span className="font-semibold text-blue-400">Должность:</span> {rescuer.position}
                 </p>
-                <p className="text-blue-200 mb-4">
-                  <span className="font-semibold">Образование:</span> {rescuer.education}
-                </p>
+                {rescuer.education && (
+                  <p className="text-gray-300 mb-4">
+                    <span className="font-semibold text-blue-400">Образование:</span> {rescuer.education}
+                  </p>
+                )}
                 
                 <button
                   onClick={() => toggleDetails(rescuer.id)}
-                  className="text-blue-300 hover:text-white text-sm font-medium mb-4 transition-colors"
+                  className="mt-auto w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors text-sm font-medium"
                 >
                   {expandedRescuer === rescuer.id ? 'Скрыть квалификацию' : 'Показать квалификацию'}
                 </button>
                 
                 {expandedRescuer === rescuer.id && (
-                  <div className="mt-4 space-y-2">
+                  <div className="mt-4 space-y-2 max-h-48 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-blue-500">
                     <h4 className="font-semibold text-white">Квалификация:</h4>
-                    <ul className="list-disc list-inside text-blue-200 space-y-1">
+                    <ul className="text-gray-300 space-y-2">
                       {rescuer.qualifications.map((qual, index) => (
-                        <li key={index}>{qual}</li>
+                        <li key={index} className="flex items-start">
+                          <span className="inline-block w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                          <span>{qual}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>

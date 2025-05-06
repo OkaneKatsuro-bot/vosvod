@@ -6,92 +6,101 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 export function ThreeDCardDemo() {
   const cardsData = [
     {
-      title: "Nature Explorer",
-      description: "Discover the beauty of untouched wilderness and rare species.",
+      title: "Яхтенный рулевой МИНТРАНС",
+      description: "Практика проводится в акватории Финского залива, под руководством опытного инструктора.",
       imageUrl: "img_3742.jpg"
     },
     {
-      title: "City Lights",
-      description: "Experience the vibrant energy of metropolitan nightlife.",
+      title: "Права на спецтехнику МИНТРАНС",
+      description: "Учебные группы не более 10 человек, что позволяет создать индивидуальный подход к каждому курсанту.",
+      imageUrl: "1-768x576.jpg"
+    },
+    {
+      title: "Обучение матросов, мотористов, рулевых речного флота",
+      description: "Подготовка судоводителей маломерных судов",
       imageUrl: "2-2-768x645.jpeg"
     },
     {
-      title: "Mountain Adventure",
-      description: "Conquer the highest peaks and enjoy breathtaking views.",
-      imageUrl: "2-2-768x645.jpeg"
+      title: "Прогулочные суда МИНТРАНС",
+      description: "Учебный Центр ВОСВОД объявляет набор на обучение судоводителей маломерных прогулочных судов с последующим получением прав МИНТРАНС.",
+      imageUrl: "3-768x576.jpg"
     },
     {
-      title: "Beach Paradise",
-      description: "Relax on golden sands with crystal clear waters.",
-      imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2673&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      title: "Коммерческие суда МИНТРАНС",
+      description: "Программа профессионального обучения для судоводителя маломерного судна, используемого в коммерческих целях.",
+      imageUrl: "IMG_3947-768x576.jpg"
     },
     {
-      title: "Desert Mystique",
-      description: "Explore the vast, silent beauty of arid landscapes.",
-      imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      title: "Курсы судоводителей маломерного судна (Курсы ГИМС)",
+      description: "Учебный Центр ВОСВОД (Всероссийское Общество Спасания на Водах) проводит курсы подготовки судоводителей маломерных судов по всем категориям.",
+      imageUrl: "IMG_3961-768x576.jpg"
     },
     {
-      title: "Forest Retreat",
-      description: "Immerse yourself in the tranquility of ancient woods.",
-      imageUrl: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      title: "Права на квадроцикл, снегоход. Гостехнадзор",
+      description: "Преподается в классах оборудованных последним словом техники обучения. Учебные группы не более 10 человек, что позволяет создать индивидуальный подход к каждому курсанту.",
+      imageUrl: "1-1-768x512.jpg"
     },
     {
-      title: "Winter Wonderland",
-      description: "Enjoy the magic of snow-covered landscapes.",
-      imageUrl: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      title: "Обучение водолазов, дайверов",
+      description: "Учебный Центр ВОСВОД производит обучение водолазов 4-7 разряда и дайверов категорий Diver CMAS 1 звезда и Diver CMAS 2 звезды.",
+      imageUrl: "2-768x512.jpg"
     },
     {
-      title: "Autumn Colors",
-      description: "Witness the spectacular transformation of fall foliage.",
-      imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Waterfall Escape",
-      description: "Feel the power and beauty of cascading waters.",
-      imageUrl: "https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      title: "Спасатели",
+      description: "Курс обучения включает в себя полный спектр навыков для обеспечения безопасности и спасания на водных объектах, местах массового отдыха людей на водах, аквапарках, бассейнах,SPA-зонах, детских оздоровительных лагерей и т.д.",
+      imageUrl: "4-768x512.jpg"
     }
   ];
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-[#0a1a2f] py-12">
-      {/* Контент */}
+    <div className="relative w-full min-h-screen overflow-hidden py-12  from-blue-900/30 to-black">
       <section className="relative z-10 w-full min-h-screen py-20">
         <div className="w-full max-w-7xl mx-auto px-4">
           <div className="w-full text-center mb-16">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Наши программы
+              <span className="border-b-2 pb-2">
+                Программы обучения
+              </span>
             </h2>
             <p className="text-xl sm:text-2xl text-gray-300">
-              Выберите подходящий курс и начните обучение
+              Выберите подходящий курс и начните профессиональное обучение
             </p>
           </div>
 
-          {/* Сетка карточек */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cardsData.map((card, index) => (
-              <CardContainer key={index} className="inter-var">
-                <CardBody className="bg-black/40 backdrop-blur-lg relative group/card hover:shadow-2xl hover:shadow-blue-500/20 border-white/20 w-full h-full rounded-xl p-6 border">
-                  <CardItem
-                    translateZ="50"
-                    className="text-2xl font-bold text-blue-400"
-                  >
-                    {card.title}
+              <CardContainer key={index} className="inter-var h-full">
+                <CardBody className="bg-black/60 backdrop-blur-xl relative group/card hover:shadow-2xl hover:shadow-blue-500/30 border-white/30 w-full h-full rounded-xl p-6 border flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 rounded-xl" />
+                  
+                  <div className="flex-1 relative z-10">
+                    <CardItem
+                      translateZ="50"
+                      className="text-2xl font-bold text-blue-400 mb-4 line-clamp-2 drop-shadow-lg"
+                    >
+                      {card.title}
+                    </CardItem>
+                    <CardItem
+                      as="p"
+                      translateZ="60"
+                      className="text-gray-200 text-sm line-clamp-3 drop-shadow-md"
+                    >
+                      {card.description}
+                    </CardItem>
+                  </div>
+
+                  <CardItem translateZ="100" className="w-full mt-4 relative">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg" />
+                      <img
+                        src={card.imageUrl}
+                        className="h-48 w-full object-cover rounded-lg group-hover/card:shadow-xl border border-white/30"
+                        alt={card.title}
+                      />
+                    </div>
                   </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-gray-300 text-sm mt-4"
-                  >
-                    {card.description}
-                  </CardItem>
-                  <CardItem translateZ="100" className="w-full mt-6">
-                    <img
-                      src={card.imageUrl}
-                      className="h-48 w-full object-cover rounded-lg group-hover/card:shadow-xl border border-white/20"
-                      alt={card.title}
-                    />
-                  </CardItem>
-                  <div className="flex justify-between items-center mt-8">
+
+                  <div className="flex justify-between items-center mt-6 relative z-10">
                     <CardItem
                       translateZ={20}
                       as="a"

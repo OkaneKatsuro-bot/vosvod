@@ -14,8 +14,8 @@ export default function Home() {
                 <Hero/>
                 <ThreeDCardDemo/>
                 <VOSVODCards/>
-                <RescueBentoGrid/>
                 <BridgeTeamRescuers/>
+                <RescueBentoGrid/>
             </main>
         </>
     )

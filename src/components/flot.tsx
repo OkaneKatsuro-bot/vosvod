@@ -1,83 +1,89 @@
+// components/rescue-bento-grid.tsx
+"use client";
+
 import { cn } from "@/lib/utils";
-import React from "react";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
-import Image from "next/image";
 
 export function RescueBentoGrid() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-950 flex flex-col">
-      {/* Заголовок */}
-      <div className="pt-20 pb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-blue-900 dark:text-blue-200">
-          <span className="bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
-            Наш Флот
-          </span>
-        </h2>
-        <p className="mt-4 text-lg text-blue-700 dark:text-blue-300 max-w-2xl mx-auto px-4">
-          Современные спасательные средства и специализированная техника для оперативной работы
-        </p>
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900 via-blue-950 to-black flex flex-col relative overflow-hidden">
+      {/* Star particles background */}
+      <div className="absolute inset-0 z-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-0.5 h-0.5 bg-white rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
       </div>
 
-      {/* Bento Grid на весь экран */}
-      <div className="flex-1 w-full px-4 pb-12">
-        <BentoGrid className="max-w-7xl mx-auto h-full">
-          {rescueItems.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              imageUrl={item.imageUrl} // Добавлен новый пропс
-              className={cn(
-                "border-2 border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-500",
-                i === 3 ? "md:col-span-2" : ""
-              )}
-            />
-          ))}
-        </BentoGrid>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Заголовок */}
+        <div className="pt-20 pb-12 text-center space-y-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,118,255,0.5)]">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+              Наш Флот
+            </span>
+          </h2>
+          <p className="mt-4 text-xl text-blue-200 max-w-3xl mx-auto px-4 font-light">
+            Современные спасательные средства и специализированная техника для оперативной работы
+          </p>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="w-full px-4 pb-12">
+          <BentoGrid className="max-w-7xl mx-auto">
+            {rescueItems.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                description={item.description}
+                imageUrl={item.imageUrl}
+                className={cn(
+                  "bg-black/40 backdrop-blur-lg border border-blue-800/50 hover:border-blue-400/50 transition-all min-h-[400px]",
+                  i === 3 ? "md:col-span-2" : ""
+                )}
+                titleClass="text-white/90 group-hover/bento:text-blue-400 text-3xl"
+                descriptionClass="text-blue-200/80 font-medium"
+              />
+            ))}
+          </BentoGrid>
+        </div>
       </div>
     </div>
   );
 }
 
-const RescueImage = ({ src }: { src: string }) => (
-  <div className="relative flex-1 w-full h-full min-h-[8rem] rounded-xl overflow-hidden">
-    <Image
-      src={src}
-      alt=""
-      fill
-      className="object-cover"
-    />
-  </div>
-);
-
 const rescueItems = [
   {
     title: "Wellboat -51",
-    description: "",
-    header: <RescueImage src="/rescue-boats.jpg" />,
+    description: "Специализированное спасательное судно",
     imageUrl: "/Wellboat-51.jpg",
   },
   {
     title: "Гидроцикл Polaris",
-    description: "",
+    description: "Высокоскоростное водное транспортное средство",
     imageUrl: "/Polaris.jpg",
   },
   {
     title: "Аэробот STEL",
-    description: "",
-    header: <RescueImage src="/medical-module.jpg" />,
+    description: "Амфибийное судно для сложных условий",
     imageUrl: "/Stel.png",
   },
   {
     title: "Судно на воздушной подушке CHRISTY 6143",
     description: "Современное оборудование для поисковых операций",
-    header: <RescueImage src="/navigation-system.jpg" />,
     imageUrl: "/Christy6143.jpg",
   },
   {
     title: "Крейсерская парусная яхта PINTO",
-    description: "Круглосуточная готовность к выезду",
-    header: <RescueImage src="/support-team.jpg" />,
+    description: "Многофункциональное судно для спасательных операций",
     imageUrl: "/yacht.jpg",
   },
 ];
