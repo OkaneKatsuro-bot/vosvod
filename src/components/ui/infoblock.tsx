@@ -196,7 +196,7 @@ const InfoBlock = () => {
           <div className="border-b pb-4">
             <h4 className="font-bold text-lg text-blue-900">Категории прав ГИМС:</h4>
             <ul className="list-disc pl-6 space-y-2 mt-2 text-gray-700">
-              <li>Маломерное моторное судно (катер, мотолодка)</li>
+              <li>Маломерное education судно (катер, мотолодка)</li>
               <li>Гидроцикл (аквабайк)</li>
               <li>Аэробот</li>
               <li>Судно на воздушной подушке</li>

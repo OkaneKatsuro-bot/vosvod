@@ -20,18 +20,18 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         <html lang="ru">
         <body className={`${sans.className} relative`}>
         {!isTest && (
-            <div className="fixed inset-0 -z-10">
-                <Image
-                    src="/Rectangle.png"
-                    alt="Фон сайта"
-                    fill
-                    className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-blue-900/30" />
-            </div>
-        )}
-
+  <div className="fixed inset-0 -z-10">
+    <Image
+      src="/Rectangle.png"
+      alt="Фон сайта"
+      fill
+      className="object-cover w-full h-full"
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f33cc] to-[#0a1a40cc] backdrop-blur-md" />
+  </div>
+)}
         {!isTest && <Header />}
+
 
         <main className="relative">{children}</main>
 
