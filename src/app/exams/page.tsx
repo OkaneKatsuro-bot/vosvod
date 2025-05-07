@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import {useRouter} from "next/navigation";
 
 const mockExamData = [
   {
@@ -22,6 +23,7 @@ const mockExamData = [
 export default function ExamsPage() {
   const [activeSection, setActiveSection] = useState<number | null>(null);
 
+  const router = useRouter();
   return (
     <div className="max-w-6xl mx-auto p-6">
       <header className="mb-8">
@@ -67,6 +69,7 @@ export default function ExamsPage() {
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
                     {section.tickets.map((ticket, index) => (
                       <div
+                          onClick={()=> router.push(`/testtest`)}
                         key={index}
                         className="p-3 text-center bg-blue-50 rounded-md hover:bg-blue-100 cursor-pointer"
                       >

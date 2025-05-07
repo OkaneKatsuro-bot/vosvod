@@ -21,7 +21,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     result: undefined,
 
     loadTest: async () => {
-        const res = await fetch(`http://localhost:4200/tests`)
+        const res = await fetch(`https://vosvod-backend.onrender.com/tests`)
         const test: Test = await res.json()
         set({test, answers: {}, result: undefined})
     },
@@ -38,7 +38,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     submit: async () => {
         const {answers} = get()
         const payload: SubmitPayload = {answers}
-        const res = await fetch(`http://localhost:4200/tests/submit`, {
+        const res = await fetch(`https://vosvod-backend.onrender.com/tests/submit`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload),
