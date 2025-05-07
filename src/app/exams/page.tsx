@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import ExamSection from '@/components/ExamSection';
 
 const mockExamData = [
   {

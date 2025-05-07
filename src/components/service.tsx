@@ -53,7 +53,7 @@ export function ThreeDCardDemo() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden py-12  from-blue-900/30 to-black">
+    <div className="relative w-full min-h-screen overflow-hidden py-12 backdrop-blur-2xl from-blue-900/30 to-black">
       <section className="relative z-10 w-full min-h-screen py-20">
         <div className="w-full max-w-7xl mx-auto px-4">
           <div className="w-full text-center mb-16">

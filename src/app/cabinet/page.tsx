@@ -1,8 +1,5 @@
 'use client'
 import { LampDemo } from "@/components/lampDemo"
-import InfoBlock from "@/components/ui/infoblock"
-import AccessibilityGuide from "@/components/accessibilityGuide"
-import { cn } from "@/lib/utils"
 
 export default function AccessibilityGuidePage() {
   return (

@@ -4,15 +4,24 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { mockTests } from "@/data/tests";
 import { AuthForm } from "./AuthForm";
-import { Loader } from "lucide-react";
+import {CheckCircle, Loader} from "lucide-react";
+import {Button} from "@/components/ui/button";
 
+
+
+export interface Test {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  createdAt: string;
+}
 
 interface ProtectedLayoutProps {
   testId: number;
-  children: React.ReactNode;
 }
 
-export function ProtectedLayout({ children, testId }: ProtectedLayoutProps) {
+export function ProtectedLayout({  testId }: ProtectedLayoutProps) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [accessGranted, setAccessGranted] = useState(false);
@@ -22,8 +31,9 @@ export function ProtectedLayout({ children, testId }: ProtectedLayoutProps) {
   useEffect(() => {
     const checkAuthorization = () => {
       try {
-        const test = mockTests.find((t) => t.id === testId);
-        
+        // const test = mockTests.find((t) => t.id === testId);
+
+        const test: Test = mockTests[0];
         if (!test) {
           setError("Тест не найден");
           return;
@@ -34,9 +44,9 @@ export function ProtectedLayout({ children, testId }: ProtectedLayoutProps) {
         const isAuthorized = localStorage.getItem(`test-auth-${testId}`) === "granted";
         if (isAuthorized) {
           setAccessGranted(true);
-          router.replace(`/test/${testId}`);
+          router.replace(`/exams`);
         }
-      } catch (error) {
+      } catch (error ) {
         setError("Ошибка при проверке авторизации");
       } finally {
         setIsLoading(false);
@@ -49,7 +59,7 @@ export function ProtectedLayout({ children, testId }: ProtectedLayoutProps) {
   const handleAuthSuccess = () => {
     localStorage.setItem(`test-auth-${testId}`, "granted");
     setAccessGranted(true);
-    router.replace(`/test/${testId}`);
+    router.replace(`/exams`);
   };
 
   if (isLoading) {
@@ -75,7 +85,27 @@ export function ProtectedLayout({ children, testId }: ProtectedLayoutProps) {
   }
 
   return accessGranted ? (
-    <div className="min-h-screen bg-white">{children}</div>
+    <div className="min-h-screen bg-white"><div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg mt-10">
+      <div className="flex flex-col items-center gap-6 text-center">
+        <CheckCircle className="h-16 w-16 text-green-600"/>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Демо-доступ
+          </h1>
+          <p className="text-gray-600">
+            Тестовый ID: {testId}
+          </p>
+        </div>
+        <Button
+            onClick={()=>router.push(`/exams?testId=${123}`)}
+            size="lg"
+            className="gap-2"
+        >
+          Перейти к экзаменам
+          <span className="text-xl">→</span>
+        </Button>
+      </div>
+    </div></div>
   ) : (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 p-4">
       {selectedTest && (
