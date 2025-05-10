@@ -2,14 +2,14 @@
 
 
 import {useEffect, useState} from 'react'
-import {useParams} from 'next/navigation'
+//import {useParams} from 'next/navigation'
 import {useQuizStore} from '@/stores/test.store'
 import type {SubmitResult} from '@/types/test.type'
 
 export default function TestPage() {
-    const params = useParams()
-    const rawId = Array.isArray(params.id) ? params.id[0] : params.id
-    const testId = rawId ? Number(rawId) : NaN
+    //const params = useParams()
+    //const rawId = Array.isArray(params.id) ? params.id[0] : params.id
+    //const testId = rawId ? Number(rawId) : NaN
 
     const {
         test,
@@ -22,9 +22,10 @@ export default function TestPage() {
 
     const [questionNumber, setQuestionNumber] = useState(0)
 
+    // вызываем без аргументов
     useEffect(() => {
-        if (!isNaN(testId)) loadTest(testId)
-    }, [testId, loadTest])
+        loadTest()
+    }, [loadTest])
 
     if (!test) {
         return (
