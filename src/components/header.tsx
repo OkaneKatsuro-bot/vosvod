@@ -1,220 +1,181 @@
 'use client'
 
 import Link from "next/link"
-import {Container} from './ui/container'
+import { Container } from './ui/container'
 import Image from 'next/image'
-import {User, Search, Menu, X} from "lucide-react"
-import {useRouter, usePathname} from "next/navigation"
-import {useEffect, useState} from "react"
-import {motion} from "framer-motion"
-import {cn} from "@/lib/utils"
-import {Button} from "./ui/button"
-import {DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem} from "@radix-ui/react-dropdown-menu"
+import { useRouter, usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils"
+import { Button } from "./ui/button"
+import { AnimatePresence, motion } from "framer-motion"
 
 export const Header = () => {
-    const router = useRouter()
-    const pathname = usePathname()
-    const [isOpen, setIsOpen] = useState(false)
-    const [isScrolled, setIsScrolled] = useState(false)
-    const [session] = useState<boolean>(false)
-    const navItems = [
-        {name: "Обучение", path: "/education"},
-        {name: "Информация", path: "/information"},
-        {name: "Сведения об организации", path: "/about"},
-        {name: "Версия для слабовидящих", path: "/accessibility"},
-        {name: "Контакты", path: "/contacts"},
-    ]
+  const router = useRouter()
+  const pathname = usePathname()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [openMenu, setOpenMenu] = useState<'education' | 'organization' | null>(null)
 
-    useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 10)
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+  const navItems = [
+    { name: "Информация", path: "/information" },
+    { name: "Версия для слабовидящих", path: "/accessibility" },
+    { name: "Контакты", path: "/contacts" },
+  ]
 
-    const isActive = (path: string) => pathname === path
+  const organizationItems = [
+    { name: "01. Основные сведения", path: "/osnovysveden" },
+    { name: "02. Структура и органы управления", path: "/structura" },
+    { name: "03. Документы", path: "/document" },
+    { name: "04. Образование", path: "/education" },
+    { name: "05. Образовательные стандарты", path: "/obrazstandart" },
+    { name: "06. Руководство и Педагогический состав", path: "/rukovodstvo" },
+    { name: "07. Материально-техническое обеспечение и оснащённость образовательного процесса", path: "/material" },
+    { name: "08. Стипендии и иные виды материальной поддержки", path: "/support" },
+    { name: "09. Платные образовательные услуги", path: "/plateducation" },
+    { name: "10. Финансово-хозяйственная деятельность", path: "/finplan" },
+    { name: "11. Вакантные места для приема (перевода)", path: "/perevod" },
+    { name: "12. Доступная среда", path: "/sreda" },
+    { name: "13. Международная деятельность", path: "/intern" },
+  ]
 
-    return (
-        <header className={cn(
-            "fixed top-0 left-0 w-full z-50 py-4 transition-all duration-300",
-            isScrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/90 backdrop-blur-sm"
-        )}>
-            <Container className="px-4 sm:px-6 max-w-full">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <motion.div
-                        initial={{opacity: 0, x: -20}}
-                        animate={{opacity: 1, x: 0}}
-                        className="flex items-center gap-4"
-                    >
-                        <Link href="/public" className="flex items-center gap-4 group">
-                            <div
-                                className="w-16 h-16 rounded-full border-2 border-blue-600/30 group-hover:border-blue-600 transition-all flex items-center justify-center bg-gray-50">
-                                <Image
-                                    src="/logo-vosvod.png"
-                                    alt="Логотип"
-                                    width={64}
-                                    height={64}
-                                    className="rounded-full object-cover"
-                                    priority
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-sm text-gray-700 whitespace-nowrap">
-                                    АНО ДПО &#34;Учебный центр судовождения&#34;
-                                </span>
-                                <span className="text-2xl font-bold text-black whitespace-nowrap uppercase tracking-tight">
-                                    УЧЕБНЫЙ ЦЕНТР ВОСВОД
-                                </span>
-                            </div>
-                        </Link>
-                    </motion.div>
+  const educationItems = [
+    { name: "Судоводители ГИМС", path: "/sudovoditely" },
+    { name: "Парусные суда ГИМС", path: "/parusniesyda" },
+    { name: "Суда особой конструкции ГИМС", path: "/sudaosoboyconst" },
+    { name: "Коммерческие суда МИНТРАНС", path: "/commercsud" },
+    { name: "Прогулочные суда Минтранс", path: "/progulochnye" },
+    { name: "Яхтенный рулевой Минтранс", path: "/yachtrulevoy" },
+    { name: "Спасатели", path: "/spasately" },
+    { name: "Права на спецтехнику", path: "/pravaSpecTechnika" },
+    { name: "Обучение водолазов дайверов", path: "/vodolaz" },
+  ]
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-2">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.path}
-                                href={item.path}
-                                className={cn(
-                                    "relative px-5 py-3 text-base font-medium rounded-lg transition-colors",
-                                    isActive(item.path)
-                                        ? "text-blue-800 bg-blue-50 font-semibold"
-                                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                )}
-                            >
-                                {item.name}
-                                {isActive(item.path) && (
-                                    <motion.span
-                                        layoutId="activeNavItem"
-                                        className="absolute left-0 bottom-0 w-full h-1 bg-blue-600"
-                                        transition={{type: "spring", bounce: 0.2, duration: 0.6}}
-                                    />
-                                )}
-                            </Link>
-                        ))}
-                    </nav>
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-                    {/* Right Side */}
-                    <div className="flex items-center gap-3">
-                        <Button
-                            variant="ghost"
-                            size="lg"
-                            className="text-gray-700 hover:bg-gray-100 rounded-full p-3"
-                            aria-label="Поиск"
-                        >
-                            <Search className="h-6 w-6"/>
-                        </Button>
+  return (
+    <header className={cn(
+      "fixed top-0 left-0 w-full z-50 py-4 transition-all duration-300",
+      isScrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/90 backdrop-blur-sm"
+    )}>
+      <Container className="px-6 max-w-screen-2xl">
+        <div className="flex items-center justify-between">
+          {/* Логотип */}
+          <Link href="/public" className="flex items-center gap-4 group">
+            <div className="w-14 h-14 rounded-full border border-blue-600/30 group-hover:border-blue-600 transition-all flex items-center justify-center bg-gray-50">
+              <Image src="/logo-vosvod.png" alt="Логотип" width={56} height={56} className="rounded-full object-cover" priority />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-gray-700 whitespace-nowrap">АНО ДПО "Учебный центр"</span>
+              <span className="text-xl font-bold text-black uppercase tracking-tight">ВОСВОД</span>
+            </div>
+          </Link>
 
-                        {session ? (
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        size="lg"
-                                        className="gap-2 text-gray-700 hover:bg-gray-100 rounded-full p-3"
-                                    >
-                                        <User className="h-6 w-6"/>
-                                        <span className="hidden sm:inline text-base">Аккаунт</span>
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent
-                                    align="end"
-                                    className="w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
-                                >
-                                    <DropdownMenuItem
-                                        className="px-4 py-3 text-base text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                        onClick={() => router.push('/profile')}
-                                    >
-                                        Профиль
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                        className="px-4 py-3 text-base text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                        onClick={() => router.push('/courses')}
-                                    >
-                                        Мои курсы
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem
-                                        className="px-4 py-3 text-base text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                        onClick={() => router.push('/signout')}
-                                    >
-                                        Выход
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        ) : (
-                            <Button
-                                onClick={() => router.push('/cabinet')}
-                                size="lg"
-                                className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 h-12 text-base"
-                            >
-                                Личный кабинет
-                            </Button>
-                        )}
+          {/* Навигация */}
+          <nav className="flex items-center gap-6 relative z-50">
+            {/* Обучение */}
+            <div
+  className="relative"
+  onMouseEnter={() => setOpenMenu('education')}
+  onMouseLeave={() => setOpenMenu(null)}
+>
+  <span className="text-base text-gray-700 hover:text-blue-700 cursor-pointer font-medium transition-colors">
+    Обучение
+  </span>
+  <AnimatePresence>
+    {openMenu === 'education' && (
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.2 }}
+        className="absolute top-full left-0 mt-2 bg-white shadow-xl border rounded-2xl w-80 p-2 z-50"
+      >
+        {educationItems.map((item) => (
+          <button
+            key={item.path}
+            onClick={() => {
+              router.push(item.path)
+              setOpenMenu(null)
+            }}
+            className="w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50/80 transition-all rounded-lg text-sm"
+          >
+            {item.name}
+          </button>
+        ))}
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
-                        <Button
-                            variant="ghost"
-                            size="lg"
-                            className="md:hidden text-gray-700 hover:bg-gray-100 rounded-full p-3"
-                            onClick={() => setIsOpen(!isOpen)}
-                            aria-label="Меню"
-                        >
-                            {isOpen ? <X className="h-6 w-6"/> : <Menu className="h-6 w-6"/>}
-                        </Button>
-                    </div>
-                </div>
+            {/* Информация */}
+            <Link
+              href="/information"
+              className={cn(
+                "text-base font-medium text-gray-700 hover:text-blue-700",
+                pathname === "/information" && "text-blue-800"
+              )}
+            >
+              Информация
+            </Link>
 
-                {/* Mobile Menu */}
-                {isOpen && (
-                    <motion.div
-                        initial={{opacity: 0, height: 0}}
-                        animate={{opacity: 1, height: 'auto'}}
-                        exit={{opacity: 0, height: 0}}
-                        transition={{duration: 0.2}}
-                        className="md:hidden overflow-hidden bg-white shadow-lg"
-                    >
-                        <div className="py-4 space-y-2 px-4">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    href={item.path}
-                                    className={cn(
-                                        "block px-4 py-3 text-lg font-medium rounded-lg transition-colors",
-                                        isActive(item.path)
-                                            ? "bg-blue-50 text-blue-800 font-semibold"
-                                            : "text-gray-700 hover:bg-gray-100"
-                                    )}
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                            <div className="pt-4 space-y-3">
-                                {!session && (
-                                    <Button
-                                        onClick={() => {
-                                            router.push('/signin')
-                                            setIsOpen(false)
-                                        }}
-                                        variant="outline"
-                                        className="w-full py-3 text-base h-14"
-                                    >
-                                        Войти
-                                    </Button>
-                                )}
-                                <Button
-                                    onClick={() => {
-                                        router.push('/signup')
-                                        setIsOpen(false)
-                                    }}
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-base h-14"
-                                >
-                                    Записаться на курс
-                                </Button>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </Container>
-        </header>
-    )
+            {/* Сведения */}
+            <div
+  className="relative"
+  onMouseEnter={() => setOpenMenu('organization')}
+  onMouseLeave={() => setOpenMenu(null)}
+>
+  <span className="text-base text-gray-700 hover:text-blue-700 cursor-pointer font-medium transition-colors">
+    Сведения об организации
+  </span>
+  <AnimatePresence>
+    {openMenu === 'organization' && (
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.2 }}
+        className="absolute top-full left-0 mt-2 bg-white shadow-xl border rounded-2xl w-96 p-2 z-50"
+      >
+        {organizationItems.map((item) => (
+          <button
+            key={item.path}
+            onClick={() => {
+              router.push(item.path)
+              setOpenMenu(null)
+            }}
+            className="w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50/80 transition-all rounded-lg text-sm"
+          >
+            {item.name}
+          </button>
+        ))}
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
+            {/* Прочие пункты */}
+            {navItems.filter(i => i.path !== "/information").map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className="text-base font-medium text-gray-700 hover:text-blue-700"
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            {/* Личный кабинет */}
+            <Button
+              onClick={() => router.push('/cabinet')}
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 h-10 text-base"
+            >
+              Личный кабинет
+            </Button>
+          </nav>
+        </div>
+      </Container>
+    </header>
+  )
 }

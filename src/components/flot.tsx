@@ -5,7 +5,7 @@ import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
 
 export function RescueBentoGrid() {
   return (
-    <section className="bg-[#f5f5f6] px-4">
+    <section className="bg-[#f5f5f6] px-4 pb-12">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-semibold text-blue-800">
@@ -25,15 +25,13 @@ export function RescueBentoGrid() {
               description={item.description}
               imageUrl={item.imageUrl}
               className={cn(
-                "relative bg-white overflow-hidden border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 min-h-[400px]",
+                "relative overflow-hidden border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 min-h-[400px]",
                 i === 3 ? "md:col-span-2" : ""
               )}
+              // Белый текст без затемнения
               titleClass="relative z-10 text-white text-xl font-semibold group-hover/bento:text-blue-200 transition-colors"
               descriptionClass="relative z-10 text-white/90 mt-2 text-sm"
-            >
-              {/* затемнение поверх картинки */}
-              <div className="absolute inset-0 bg-black/40 z-0" />
-            </BentoGridItem>
+            />
           ))}
         </BentoGrid>
       </div>
