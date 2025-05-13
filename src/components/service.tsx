@@ -53,76 +53,58 @@ export function ThreeDCardDemo() {
   ];
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden py-12 backdrop-blur-2xl from-blue-900/30 to-black">
-      <section className="relative z-10 w-full min-h-screen py-20">
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="w-full text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              <span className="border-b-2 pb-2">
-                Программы обучения
-              </span>
-            </h2>
-            <p className="text-xl sm:text-2xl text-gray-300">
-              Выберите подходящий курс и начните профессиональное обучение
-            </p>
-          </div>
+    <div className="min-h-screen bg-[#f5f5f6] py-16 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
+      <header className="mb-16 text-center">
+  <h2 className="text-4xl md:text-5xl font-semibold text-blue-800 mb-4">
+    Программы <span className="text-blue-600">обучения</span>
+  </h2>
+  <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+    Выберите подходящий курс и начните профессиональное обучение с опытными инструкторами центра ВОСВОД.
+  </p>
+</header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cardsData.map((card, index) => (
-              <CardContainer key={index} className="inter-var h-full">
-                <CardBody className="bg-black/60 backdrop-blur-xl relative group/card hover:shadow-2xl hover:shadow-blue-500/30 border-white/30 w-full h-full rounded-xl p-6 border flex flex-col">
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 rounded-xl" />
-                  
-                  <div className="flex-1 relative z-10">
-                    <CardItem
-                      translateZ="50"
-                      className="text-2xl font-bold text-blue-400 mb-4 line-clamp-2 drop-shadow-lg"
-                    >
-                      {card.title}
-                    </CardItem>
-                    <CardItem
-                      as="p"
-                      translateZ="60"
-                      className="text-gray-200 text-sm line-clamp-3 drop-shadow-md"
-                    >
-                      {card.description}
-                    </CardItem>
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {cardsData.map((card, index) => (
+    <CardContainer key={index} className="inter-var h-full">
+      <CardBody className="bg-white hover:shadow-md transition-shadow duration-300 border border-gray-200 rounded-xl p-6 flex flex-col h-full">
+        <div className="flex-1 flex flex-col">
+          <CardItem className="text-lg font-semibold text-blue-700 mb-2 line-clamp-2">
+            {card.title}
+          </CardItem>
+          <CardItem as="p" className="text-sm text-gray-600 line-clamp-3 flex-grow">
+            {card.description}
+          </CardItem>
 
-                  <CardItem translateZ="100" className="w-full mt-4 relative">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg" />
-                      <img
-                        src={card.imageUrl}
-                        className="h-48 w-full object-cover rounded-lg group-hover/card:shadow-xl border border-white/30"
-                        alt={card.title}
-                      />
-                    </div>
-                  </CardItem>
-
-                  <div className="flex justify-between items-center mt-6 relative z-10">
-                    <CardItem
-                      translateZ={20}
-                      as="a"
-                      href="#"
-                      className="px-4 py-2 rounded-lg text-sm font-medium text-blue-400 hover:bg-blue-500/10 transition-colors"
-                    >
-                      Подробнее →
-                    </CardItem>
-                    <CardItem
-                      translateZ={20}
-                      as="button"
-                      className="px-6 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
-                    >
-                      Выбрать
-                    </CardItem>
-                  </div>
-                </CardBody>
-              </CardContainer>
-            ))}
-          </div>
+          <CardItem className="mt-4">
+            <img
+              src={card.imageUrl}
+              alt={card.title}
+              className="rounded-md w-full h-40 object-cover border border-gray-200"
+            />
+          </CardItem>
         </div>
-      </section>
+
+        <div className="mt-6 flex justify-between items-center">
+          <CardItem
+            as="a"
+            href="#"
+            className="text-sm text-blue-600 hover:underline font-medium"
+          >
+            Подробнее →
+          </CardItem>
+          <CardItem
+            as="button"
+            className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md transition-colors"
+          >
+            Выбрать
+          </CardItem>
+        </div>
+      </CardBody>
+    </CardContainer>
+  ))}
+</div>
+      </div>
     </div>
   );
 }
