@@ -14,6 +14,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <html lang="ru">
       <body className="font-sans relative">
         {!isTest && (
+
           <div className="fixed inset-0 -z-10">
             <Image
               src="/Rectangle.png"
@@ -25,7 +26,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
           </div>
         )}
 
+
         {!isTest && <Header />}
+
 
         <main className="relative">{children}</main>
 

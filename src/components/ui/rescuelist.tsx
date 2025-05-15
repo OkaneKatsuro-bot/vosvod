@@ -78,64 +78,55 @@ export default function BridgeTeamRescuers() {
       imageUrl: "/флот7.jpg",
     }
   ];
-
   return (
-    <div className="min-h-screen to-gray-950 py-12 px-4">
+    <section className="bg-[#f5f5f6] py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12 text-white">
-          <span className="relative inline-block">
-            <span className="absolute inset-x-0 bottom-0 h-1 bg-blue-500 w-full"></span>
-            <span className="relative">Команда спасателей мостика</span>
-          </span>
+        <h2 className="text-4xl md:text-5xl font-semibold text-blue-800 text-center mb-12">
+          Команда спасателей мостика
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
           {rescuers.map((rescuer) => (
-            <div 
+            <div
               key={rescuer.id}
-              className="h-full bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col shadow-lg hover:shadow-blue-500/20"
+              className="flex flex-col h-full bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
             >
-              <div className="relative aspect-square w-full overflow-hidden">
-  <Image
-    src={rescuer.imageUrl}
-    alt={rescuer.fullName}
-    fill
-    className="object-cover grayscale-[15%] brightness-105 contrast-125"
-    style={{ 
-      transform: 'translateZ(0)',
-      backfaceVisibility: 'hidden'
-    }}
-    priority={false}
-  />
-  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 rounded-xl z-0" />
-</div>        
-              <div className="p-6 flex flex-col flex-1 bg-gray-800/80">
-                <h3 className="text-xl font-bold text-white mb-2">{rescuer.fullName}</h3>
-                <p className="text-gray-300 mb-2">
-                  <span className="font-semibold text-blue-400">Должность:</span> {rescuer.position}
+              <div className="relative aspect-square w-full">
+                <Image
+                  src={rescuer.imageUrl}
+                  alt={rescuer.fullName}
+                  fill
+                  className="object-cover grayscale-[10%] brightness-105 contrast-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60 z-10" />
+              </div>
+
+              <div className="p-6 flex flex-col flex-1 z-20 relative">
+                <h3 className="text-xl font-semibold text-blue-800 mb-2">
+                  {rescuer.fullName}
+                </h3>
+                <p className="text-gray-700 text-sm mb-2">
+                  <span className="font-medium text-blue-600">Должность:</span> {rescuer.position}
                 </p>
                 {rescuer.education && (
-                  <p className="text-gray-300 mb-4">
-                    <span className="font-semibold text-blue-400">Образование:</span> {rescuer.education}
+                  <p className="text-gray-700 text-sm mb-4">
+                    <span className="font-medium text-blue-600">Образование:</span> {rescuer.education}
                   </p>
                 )}
-                
+
                 <button
                   onClick={() => toggleDetails(rescuer.id)}
-                  className="mt-auto w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors text-sm font-medium"
+                  className="mt-auto w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors"
                 >
-                  {expandedRescuer === rescuer.id ? 'Скрыть квалификацию' : 'Показать квалификацию'}
+                  {expandedRescuer === rescuer.id ? "Скрыть квалификацию" : "Показать квалификацию"}
                 </button>
-                
+
                 {expandedRescuer === rescuer.id && (
-                  <div className="mt-4 space-y-2 max-h-48 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-blue-500">
-                    <h4 className="font-semibold text-white">Квалификация:</h4>
-                    <ul className="text-gray-300 space-y-2">
+                  <div className="mt-4 max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200 pr-2">
+                    <h4 className="text-sm font-semibold text-blue-700 mb-2">Квалификация:</h4>
+                    <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
                       {rescuer.qualifications.map((qual, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="inline-block w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                          <span>{qual}</span>
-                        </li>
+                        <li key={index}>{qual}</li>
                       ))}
                     </ul>
                   </div>
@@ -145,6 +136,6 @@ export default function BridgeTeamRescuers() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

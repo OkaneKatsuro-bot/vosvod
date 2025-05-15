@@ -55,6 +55,7 @@ export function ThreeDCardDemo() {
   return (
     <div className="min-h-screen bg-[#f5f5f6] py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
+
       <header className="mb-16 text-center">
   <h2 className="text-4xl md:text-5xl font-semibold text-blue-800 mb-4">
     Программы <span className="text-blue-600">обучения</span>
@@ -63,6 +64,7 @@ export function ThreeDCardDemo() {
     Выберите подходящий курс и начните профессиональное обучение с опытными инструкторами центра ВОСВОД.
   </p>
 </header>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   {cardsData.map((card, index) => (

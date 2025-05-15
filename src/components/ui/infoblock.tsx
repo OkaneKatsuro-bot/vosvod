@@ -65,6 +65,7 @@ const InfoBlock = () => {
                         ))}
                     </div>
                 </div>
+
             )
         },
         {
