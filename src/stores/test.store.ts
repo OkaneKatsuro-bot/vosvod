@@ -1,17 +1,13 @@
-import {SubmitPayload, SubmitResult, Test} from "@/types/test.type";
-import {create} from "zustand/react";
-
+import {create} from 'zustand/react'
+import {Test, SubmitPayload, SubmitResult} from '@/types/test.type'
 
 interface QuizState {
     test: Test | null
     answers: Record<number, number[]>
     result?: SubmitResult
 
-    /** Загрузка теста по id */
-    loadTest: (testId: number) => Promise<void>
-    /** Обновить выбор для конкретного вопроса */
+    loadTest: () => Promise<void>
     setAnswer: (questionId: number, optionIds: number[]) => void
-    /** Отправить ответы на бек и получить результат */
     submit: () => Promise<void>
 }
 
@@ -20,30 +16,52 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     answers: {},
     result: undefined,
 
+    // БЕЗ testId — просто всегда GET /tests
     loadTest: async () => {
-        const res = await fetch(`https://vosvod-backend.onrender.com/tests`)
-        const test: Test = await res.json()
-        set({test, answers: {}, result: undefined})
+        try {
+            const res = await fetch(
+                'https://vosvod-backend.onrender.com/tests',
+                {cache: 'no-store'}
+            )
+            if (!res.ok) {
+                console.error('Ошибка при загрузке теста:', res.status, res.statusText)
+                return
+            }
+            const test: Test = await res.json()
+            set({test, answers: {}, result: undefined})
+        } catch (e) {
+            console.error('Network error loading test:', e)
+        }
     },
 
-    setAnswer: (questionId, optionIds) => {
+    setAnswer: (questionId, optionIds) =>
         set(state => ({
             answers: {
                 ...state.answers,
                 [questionId]: optionIds,
-            }
-        }))
-    },
+            },
+        })),
 
     submit: async () => {
         const {answers} = get()
-        const payload: SubmitPayload = {answers}
-        const res = await fetch(`https://vosvod-backend.onrender.com/tests/submit`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload),
-        })
-        const result: SubmitResult = await res.json()
-        set({result})
-    }
+        try {
+            const res = await fetch(
+                'https://vosvod-backend.onrender.com/tests/submit',
+                {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({answers} as SubmitPayload),
+                    cache: 'no-store',
+                }
+            )
+            if (!res.ok) {
+                console.error('Ошибка при отправке ответов:', res.status, res.statusText)
+                return
+            }
+            const result: SubmitResult = await res.json()
+            set({result})
+        } catch (e) {
+            console.error('Network error submitting answers:', e)
+        }
+    },
 }))

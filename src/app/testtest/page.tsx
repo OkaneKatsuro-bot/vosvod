@@ -1,22 +1,32 @@
 'use client'
 
+
 import {useEffect, useState} from 'react'
+//import {useParams} from 'next/navigation'
 import {useQuizStore} from '@/stores/test.store'
 import type {SubmitResult} from '@/types/test.type'
 
-export default function TestPage({params}: { params: { id: string } }) {
-    const testId = Number(params.id)
-    const {test, loadTest, answers, setAnswer, submit, result} = useQuizStore()
+export default function TestPage() {
+    //const params = useParams()
+    //const rawId = Array.isArray(params.id) ? params.id[0] : params.id
+    //const testId = rawId ? Number(rawId) : NaN
 
-    // Правильно: массив [значение, сеттер]
-    const [questionNumber, setQuestionNumber] = useState<number>(0)
+    const {
+        test,
+        loadTest,
+        answers,
+        setAnswer,
+        submit,
+        result,
+    } = useQuizStore()
 
-    // Загрузка теста при монтировании
+    const [questionNumber, setQuestionNumber] = useState(0)
+
+    // вызываем без аргументов
     useEffect(() => {
-        loadTest(testId)
-    }, [testId, loadTest])
+        loadTest()
+    }, [loadTest])
 
-    // Пока не загрузился тест
     if (!test) {
         return (
             <div className="w-screen h-screen flex items-center justify-center">
@@ -25,27 +35,22 @@ export default function TestPage({params}: { params: { id: string } }) {
         )
     }
 
-    // проверяем, что для каждого вопроса есть непустой массив ответов
-    const allAnswered = test.questions.every(q =>
-        Array.isArray(answers[q.id]) && answers[q.id].length > 0
+    const allAnswered = test.questions.every(
+        (q) => Array.isArray(answers[q.id]) && answers[q.id].length > 0
     )
 
-
-    // После сабмита — результат
     if (result) {
         return <ResultView result={result}/>
     }
 
-    // Текущий вопрос
     const current = test.questions[questionNumber]
 
-    // handlers
-    const prevQuestion = () => {
+    const prevQuestion = () =>
         setQuestionNumber((qn) => Math.max(0, qn - 1))
-    }
-    const nextQuestion = () => {
-        setQuestionNumber((qn) => Math.min(test.questions.length - 1, qn + 1))
-    }
+    const nextQuestion = () =>
+        setQuestionNumber((qn) =>
+            Math.min(test.questions.length - 1, qn + 1)
+        )
 
     return (
         <section className="w-screen h-screen bg-[oklch(0.98_0.0133_233.74)]">
