@@ -68,7 +68,7 @@ export const Header = () => {
               <Image src="/logo-vosvod.png" alt="Логотип" width={56} height={56} className="rounded-full object-cover" priority />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm text-gray-700 whitespace-nowrap">АНО ДПО "Учебный центр"</span>
+              <span className="text-sm text-gray-700 whitespace-nowrap">АНО ДПО {`"Учебный центр"`}</span>
               <span className="text-xl font-bold text-black uppercase tracking-tight">ВОСВОД</span>
             </div>
           </Link>

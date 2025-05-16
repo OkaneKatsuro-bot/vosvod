@@ -3,7 +3,7 @@ import {motion} from 'framer-motion';
 import Image from "next/image";
 import {useState} from "react";
 
-const InfoBlock = () => {
+export default function FoBlock() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const handleImageClick = (imageSrc: string) => {
@@ -252,4 +252,3 @@ const InfoBlock = () => {
     );
 };
 
-export default InfoBlock;

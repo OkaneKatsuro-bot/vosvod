@@ -71,10 +71,9 @@ const iconsMap: Record<string, React.ReactNode> = {
 
 export function LampDemo() {
     const router = useRouter();
-    const [tests, setTests] = useState<Test[]>(mockTests);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [isAuthorized, setAuthorized] = useState(true);
+    const [tests] = useState<Test[]>(mockTests);
+    const [loading] = useState(false);
+    const [error] = useState<string | null>(null);
 
     // useEffect(() => {
     //   async function checkAuthHandle() {

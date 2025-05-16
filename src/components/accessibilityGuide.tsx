@@ -18,7 +18,7 @@ const AccessibilityGuide = () => {
           Инструкция для слабовидящих
         </h1>
         <p className="text-lg text-gray-700">
-          Сайт АНО ДПО "УЦС" доступен для людей с ограниченными возможностями
+          Сайт АНО ДПО {`"УЦС"`} доступен для людей с ограниченными возможностями
         </p>
       </div>
 
@@ -49,7 +49,7 @@ const AccessibilityGuide = () => {
               {['Chrome', 'Firefox', 'Opera', 'Edge'].map((browser) => (
                 <div key={browser} className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-medium text-blue-600">{browser}</h4>
-                  <p className="text-sm mt-2">Меню → Настройки масштаба → Используйте кнопки "+" и "-"</p>
+                  <p className="text-sm mt-2">Меню → Настройки масштаба → Используйте кнопки {`"+"`} и {`"-"`}</p>
                 </div>
               ))}
             </div>

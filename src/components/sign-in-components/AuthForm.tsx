@@ -19,11 +19,11 @@ const formSchema = z.object({
 interface AuthFormProps {
   testId: number;
   testTitle: string;
-  onSuccess: () => void;
-  onError: (message: string) => void;
+  onSuccessAction: () => void;
+  onErrorAction: (message: string) => void;
 }
 
-export function AuthForm({ testId, testTitle, onSuccess, onError }: AuthFormProps) {
+export function AuthForm({ testId, testTitle, onSuccessAction, onErrorAction }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(3);
   
@@ -36,24 +36,24 @@ export function AuthForm({ testId, testTitle, onSuccess, onError }: AuthFormProp
     if (attempts <= 0) return;
 
     setLoading(true);
-    onError("");
+    onErrorAction("");
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       if (values.password === "Парус2024") {
         localStorage.setItem(`test-auth-${testId}`, "granted");
-        onSuccess();
+        onSuccessAction();
       } else {
         const newAttempts = attempts - 1;
         setAttempts(newAttempts);
-        onError(`Неверный пароль. Осталось попыток: ${newAttempts}`);
+        onErrorAction(`Неверный пароль. Осталось попыток: ${newAttempts}`);
         if (newAttempts === 0) {
-          onError("Доступ заблокирован. Обратитесь к администратору");
+          onErrorAction("Доступ заблокирован. Обратитесь к администратору");
         }
       }
     } catch {
-      onError("Ошибка проверки пароля");
+      onErrorAction("Ошибка проверки пароля");
     } finally {
       setLoading(false);
     }

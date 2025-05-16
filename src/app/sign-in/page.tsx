@@ -1,9 +1,8 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
+
 import {useEffect, useState} from 'react';
-import {Loader2, CheckCircle} from 'lucide-react';
-import {Button} from '@/components/ui/button';
+import {Loader2,} from 'lucide-react';
 import {ProtectedLayout} from "@/components/sign-in-components/ProtectedLayout";
 
 // Временная функция проверки доступа
@@ -18,7 +17,7 @@ const mockVerifyAccess = (testId: number) => {
 export default function SignInPage() {
     //const router = useRouter();
     const [status, setStatus] = useState<'loading' | 'valid'>('loading');
-    const [testId, setTestId] = useState<number>(123); // Фиксированный ID для демо
+    const [testId] = useState<number>(123); // Фиксированный ID для демо
 
     useEffect(() => {
         const checkAccess = async () => {

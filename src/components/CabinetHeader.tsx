@@ -39,7 +39,7 @@ export const CabinetHeader = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-xs text-gray-500 tracking-wide">
-                АНО ДПО "Учебный центр судовождения"
+                АНО ДПО {`"Учебный центр судовождения"`}
               </span>
               <span className="text-xl font-bold text-blue-800 tracking-tight uppercase">
                 Личный кабинет ВОСВОД

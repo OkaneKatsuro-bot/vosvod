@@ -16,7 +16,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     answers: {},
     result: undefined,
 
-    // БЕЗ testId — просто всегда GET /tests
+
     loadTest: async () => {
         try {
             const res = await fetch(
