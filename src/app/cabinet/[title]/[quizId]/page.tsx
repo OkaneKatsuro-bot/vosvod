@@ -200,8 +200,7 @@ export default function TestPage() {
     );
 }
 
-
-export function ResultView({result}: { result: SubmitResult }) {
+function ResultView({result}: { result: SubmitResult }) {
     const {questions, userAnswers} = useTestsStore();
     const [resultDetailOpen, setResultDetailOpen] = useState<boolean>(false);
 
