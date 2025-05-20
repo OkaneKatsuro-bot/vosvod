@@ -20,7 +20,7 @@ export async function fetcher<T = unknown>(
 
     const baseUrl = isDev
         ? `http://localhost:4200${url}`
-        : url;
+        : ` https://vosvod-backend.onrender.com/${url}`
 
     const res = await fetch(baseUrl, {
         ...options,

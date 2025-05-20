@@ -1,77 +1,81 @@
 "use client";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import {useRouter} from "next/navigation";
-import {
-    IconCode,
-    IconBrandReact,
-    IconBrandNodejs,
-    IconDatabase,
-    IconBrandTypescript,
-    IconColorSwatch,
-    IconUser,
-} from "@tabler/icons-react";
+// import {
+//     IconCode,
+//     IconBrandReact,
+//     IconBrandNodejs,
+//     IconDatabase,
+//     IconBrandTypescript,
+//     IconColorSwatch,
+//     IconUser,
+// } from "@tabler/icons-react";
 import {cn} from "@/lib/utils";
+import {getCategoriesAction} from "@/components/cabinet-components/action";
+import {isSuccess} from "@/api/lib/isSuccessGuard";
+import {QuizeCategory} from "@/types/quizeCategory.type";
 
-interface Test {
-    id: number;
-    title: string;
-    description: string;
-    category: string;
-    createdAt: string;
-}
+// interface Test {
+//     id: number;
+//     title: string;
+//     description: string;
+//     //category: string;
+//     createdAt: string;
+// }
 
-const mockTests: Test[] = [
-    {
-        id: 1,
-        title: "МОТОРНОЕ СУДНО ГИДРОЦИКЛ (ГИМС)",
-        description: "Проверьте свои знания",
-        category: "safety",
-        createdAt: "2024-05-01",
-    },
-    {
-        id: 2,
-        title: "МИНТРАНС",
-        description: "Проверьте свои знания",
-        category: "navigation",
-        createdAt: "2024-05-02",
-    },
-    {
-        id: 3,
-        title: "ПАРУСНЫЕ СУДА (ГИМС)",
-        description: "Проверьте свои знания",
-        category: "legislation",
-        createdAt: "2024-05-03",
-    },
-    {
-        id: 4,
-        title: "СУДА ОСОБОЙ КОНСТРУКЦИИ",
-        description: "Проверьте свои знания",
-        category: "ship",
-        createdAt: "2024-05-03",
-    },
-    {
-        id: 5,
-        title: "СПАСАТЕЛЬ ВОСВОД",
-        description: "Проверьте свои знания",
-        category: "rescuer",
-        createdAt: "2024-05-03",
-    },
-];
+// const mockTests: Test[] = [
+//     {
+//         id: 1,
+//         title: "МОТОРНОЕ СУДНО ГИДРОЦИКЛ (ГИМС)",
+//         description: "Проверьте свои знания",
+//         //  category: "safety",
+//         createdAt: "2024-05-01",
+//     },
+//     {
+//         id: 2,
+//         title: "МИНТРАНС",
+//         description: "Проверьте свои знания",
+//         //  category: "navigation",
+//         createdAt: "2024-05-02",
+//     },
+//     {
+//         id: 3,
+//         title: "ПАРУСНЫЕ СУДА (ГИМС)",
+//         description: "Проверьте свои знания",
+//         // category: "legislation",
+//         createdAt: "2024-05-03",
+//     },
+//     {
+//         id: 4,
+//         title: "СУДА ОСОБОЙ КОНСТРУКЦИИ",
+//         description: "Проверьте свои знания",
+//         //category: "ship",
+//         createdAt: "2024-05-03",
+//     },
+//     {
+//         id: 5,
+//         title: "СПАСАТЕЛЬ ВОСВОД",
+//         description: "Проверьте свои знания",
+//         // category: "rescuer",
+//         createdAt: "2024-05-03",
+//     },
+// ];
 
-const iconsMap: Record<string, React.ReactNode> = {
-    technical: <IconCode className="h-5 w-5 text-[#009FE2]"/>,
-    safety: <IconBrandReact className="h-5 w-5 text-[#009FE2]"/>,
-    navigation: <IconBrandTypescript className="h-5 w-5 text-[#009FE2]"/>,
-    legislation: <IconColorSwatch className="h-5 w-5 text-[#009FE2]"/>,
-    equipment: <IconBrandNodejs className="h-5 w-5 text-[#009FE2]"/>,
-    rescue: <IconDatabase className="h-5 w-5 text-[#009FE2]"/>,
-    default: <IconUser className="h-5 w-5 text-[#009FE2]"/>,
-};
+// const iconsMap: Record<string, React.ReactNode> = {
+//     technical: <IconCode className="h-5 w-5 text-[#009FE2]"/>,
+//     safety: <IconBrandReact className="h-5 w-5 text-[#009FE2]"/>,
+//     navigation: <IconBrandTypescript className="h-5 w-5 text-[#009FE2]"/>,
+//     legislation: <IconColorSwatch className="h-5 w-5 text-[#009FE2]"/>,
+//     equipment: <IconBrandNodejs className="h-5 w-5 text-[#009FE2]"/>,
+//     rescue: <IconDatabase className="h-5 w-5 text-[#009FE2]"/>,
+//     default: <IconUser className="h-5 w-5 text-[#009FE2]"/>,
+// };
 
 export function LampDemo() {
     const router = useRouter();
-    const [tests] = useState<Test[]>(mockTests);
+    // const [tests] = useState<Test[]>(mockTests);
+    const [categories, setCategories] = useState<QuizeCategory[]>([]);
     const [loading] = useState(false);
     const [error] = useState<string | null>(null);
 
@@ -91,13 +95,29 @@ export function LampDemo() {
     // }, [testId]);
 
 
-    const handleCardClick = () => {
-        router.push(`/sign-in`);
-    };
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await getCategoriesAction();
+                if (isSuccess(res)) {
+                    setCategories(res.categories);
+                } else {
+                    throw new Error(res.message);
+                }
+            } catch (err) {
+                console.error('Не удалось загрузить категории:', err);
+            }
+        };
+        fetchCategories();
+    }, []);
 
-    const getIcon = (category: string) => {
-        return iconsMap[category] || iconsMap.default;
+    const handleCardClick = (title: string) => {
+        router.push(`/cabinet/${title}`);
     };
+    //
+    // const getIcon = (category: string) => {
+    //     return iconsMap[category] || iconsMap.default;
+    // };
 
     return (
         <div className="relative min-h-screen w-full bg-[#04314D] overflow-hidden">
@@ -176,10 +196,10 @@ export function LampDemo() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                        {tests.map((test, i) => (
+                        {categories.map((test, i) => (
                             <motion.div
                                 key={test.id}
-                                onClick={() => handleCardClick()}
+                                onClick={() => handleCardClick(test.name)}
                                 initial={{opacity: 0, y: 20}}
                                 animate={{opacity: 1, y: 0}}
                                 transition={{duration: 0.5, delay: i * 0.1}}
@@ -190,17 +210,17 @@ export function LampDemo() {
                                 )}
                             >
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-2 rounded-lg bg-[#009FE2]/10">
-                                        {getIcon(test.category)}
-                                    </div>
+                                    {/*<div className="p-2 rounded-lg bg-[#009FE2]/10">*/}
+                                    {/*    {getIcon(test.category)}*/}
+                                    {/*</div>*/}
                                     <h3 className="text-xl font-semibold text-[#B6E8FF]">
-                                        {test.title}
+                                        {test.name}
                                     </h3>
                                 </div>
-                                <p className="text-[#75D8FF] flex-grow">{test.description}</p>
-                                <div className="mt-4 text-sm text-[#B6E8FF]/80">
-                                    Создано: {new Date(test.createdAt).toLocaleDateString()}
-                                </div>
+                                {/*<p className="text-[#75D8FF] flex-grow">{test.description}</p>*/}
+                                {/*<div className="mt-4 text-sm text-[#B6E8FF]/80">*/}
+                                {/*    Создано: {new Date(test.createdAt).toLocaleDateString()}*/}
+                                {/*</div>*/}
                             </motion.div>
                         ))}
                     </div>

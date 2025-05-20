@@ -38,6 +38,8 @@ export interface QuestionResult {
 }
 
 export interface SubmitResult {
+    percentage: number;
     score: number
     maxScore: number
+    
 }

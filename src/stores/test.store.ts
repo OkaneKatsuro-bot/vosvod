@@ -1,67 +1,149 @@
-import {create} from 'zustand/react'
-import {Test, SubmitPayload, SubmitResult} from '@/types/test.type'
+import {QuizeCategory} from "@/types/quizeCategory.type";
+import {Quiz} from "@/types/quize.type";
+import {QuestionType, QuizeQuestion} from "@/types/quizeQuestion.type";
+import {create} from 'zustand';
 
-interface QuizState {
-    test: Test | null
-    answers: Record<number, number[]>
-    result?: SubmitResult
+interface TestsState {
+    categories: QuizeCategory[];
+    quizzes: Quiz[];
+    questions: QuizeQuestion[];
+    userAnswers: Record<number, number[]>;
+    result: {
+        score: number;
+        percentage: number;
+        maxScore: number;
+    } | null;
+    loading: boolean;
+    error: string | null;
 
-    loadTest: () => Promise<void>
-    setAnswer: (questionId: number, optionIds: number[]) => void
-    submit: () => Promise<void>
+    fetchCategories: () => Promise<void>;
+    fetchQuizzesByCategory: (categoryId: number) => Promise<void>;
+    fetchQuestionsByQuiz: (quizId: number) => Promise<void>;
+    setAnswer: (questionId: number, selected: number[]) => void;
+    calculateResult: () => void;
+    reset: () => void;
 }
 
-export const useQuizStore = create<QuizState>((set, get) => ({
-    test: null,
-    answers: {},
-    result: undefined,
+export const useTestsStore = create<TestsState>((set, get) => ({
+    categories: [],
+    quizzes: [],
+    questions: [],
+    userAnswers: {},
+    result: null,
+    loading: false,
+    error: null,
 
-
-    loadTest: async () => {
+    fetchCategories: async () => {
+        set({loading: true, error: null});
         try {
-            const res = await fetch(
-                'https://vosvod-backend.onrender.com/tests',
-                {cache: 'no-store'}
-            )
-            if (!res.ok) {
-                console.error('Ошибка при загрузке теста:', res.status, res.statusText)
-                return
+            const res = await fetch('https://vosvod-backend.onrender.com/api/tests/allCategories', {cache: 'no-store'});
+            if (!res.ok) throw new Error(`Error ${res.status}`);
+            const data: QuizeCategory[] = await res.json();
+            set({categories: data});
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                set({error: err.message});
+            } else {
+                set({error: String(err)});
             }
-            const test: Test = await res.json()
-            set({test, answers: {}, result: undefined})
-        } catch (e) {
-            console.error('Network error loading test:', e)
+        } finally {
+            set({loading: false});
         }
     },
 
-    setAnswer: (questionId, optionIds) =>
+    fetchQuizzesByCategory: async (categoryId) => {
+        set({loading: true, error: null});
+        try {
+            const res = await fetch(`https://vosvod-backend.onrender.com/api/tests/quizzesBycategory/${categoryId}`, {cache: 'no-store'});
+            if (!res.ok) throw new Error(`Error ${res.status}`);
+            const data: Quiz[] = await res.json();
+            set({quizzes: data});
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                set({error: err.message});
+            } else {
+                set({error: String(err)});
+            }
+        } finally {
+            set({loading: false});
+        }
+    },
+
+    fetchQuestionsByQuiz: async (quizId) => {
+        set({loading: true, error: null});
+        try {
+            const res = await fetch(`https://vosvod-backend.onrender.com/api/tests/getQuestionsByQuizeId/${quizId}`, {cache: 'no-store'});
+            if (!res.ok) throw new Error(`Error ${res.status}`);
+            const data: QuizeQuestion[] = await res.json();
+            set({questions: data});
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                set({error: err.message});
+            } else {
+                set({error: String(err)});
+            }
+
+        } finally {
+            set({loading: false});
+        }
+    },
+
+    setAnswer: (questionId, selected) => {
+        // Для SINGLE выбираем только первый элемент
+        const question = get().questions.find(q => q.id === questionId);
+        if (!question) return;
+
+        let answer = selected;
+        if (question.answerType === QuestionType.SINGLE) {
+            answer = selected.slice(0, 1);
+        }
+
         set(state => ({
-            answers: {
-                ...state.answers,
-                [questionId]: optionIds,
+            userAnswers: {
+                ...state.userAnswers,
+                [questionId]: answer,
             },
-        })),
-
-    submit: async () => {
-        const {answers} = get()
-        try {
-            const res = await fetch(
-                'https://vosvod-backend.onrender.com/tests/submit',
-                {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({answers} as SubmitPayload),
-                    cache: 'no-store',
-                }
-            )
-            if (!res.ok) {
-                console.error('Ошибка при отправке ответов:', res.status, res.statusText)
-                return
-            }
-            const result: SubmitResult = await res.json()
-            set({result})
-        } catch (e) {
-            console.error('Network error submitting answers:', e)
-        }
+        }));
     },
-}))
+
+    calculateResult: () => {
+        const { questions, userAnswers } = get();
+        let correctCount = 0;
+
+        // считаем, сколько вопросов участвует
+        const total = questions.filter(q => q.answerType !== QuestionType.FREE_ANSWER).length;
+
+        questions.forEach(q => {
+            if (q.answerType === QuestionType.FREE_ANSWER) return;
+
+            const selected = userAnswers[q.id] || [];
+            const correctOptionIds = q.options.filter(o => o.correct).map(o => o.id);
+
+            const isCorrect =
+                selected.length === correctOptionIds.length &&
+                selected.every(id => correctOptionIds.includes(id));
+
+            if (isCorrect) correctCount++;
+        });
+
+        const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+        set({
+            result: {
+                score: correctCount,
+                percentage,
+                maxScore: total,
+            },
+        });
+    },
+
+    reset: () => {
+        set({
+            quizzes: [],
+            questions: [],
+            userAnswers: {},
+            result: null,
+            error: null,
+        });
+    },
+}));
