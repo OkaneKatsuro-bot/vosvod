@@ -53,7 +53,7 @@ export const BentoGridItem = ({
         className="absolute inset-0 w-full h-full object-cover"
         alt=""
       />
-      <div className="absolute inset-0 bg-black/50 group-hover/bento:bg-black/70 transition-all" />
+      <div className="absolute inset-0 group-hover/bento:bg-black/70 transition-all" />
       
       <div className="relative p-6 flex flex-col h-full">
         {title && (

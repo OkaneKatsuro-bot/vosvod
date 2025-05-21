@@ -35,7 +35,7 @@ const WhyVOSVOD = () => {
   ]
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md mt-10">
+    <div className="bg-white p-6 rounded-2xl shadow-md mt-10 pb-10">
       <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Почему именно Учебный Центр ВОСВОД?
       </h3>

@@ -71,9 +71,7 @@ export const Header = ({ isFixed = true }: { isFixed?: boolean }) => {
     { name: 'Суда особой конструкции', path: '/sudaosoboyconst' },
     { name: 'Коммерческие суда', path: '/commercsud' },
     { name: 'Прогулочные суда', path: '/progulochnye' },
-    { name: 'Яхтенный рулевой', path: '/yachtrulevoy' },
     { name: 'Спасатели', path: '/spasately' },
-    { name: 'Права на спецтехнику', path: '/pravaSpecTechnika' },
     { name: 'Водолазы', path: '/vodolaz' },
   ]
 
