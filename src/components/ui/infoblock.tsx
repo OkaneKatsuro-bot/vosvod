@@ -189,7 +189,7 @@ export default function FoBlock() {
             {/* Модальное окно для изображения */}
             {selectedImage && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+                    className="fixed inset-0  bg-opacity-50 flex justify-center items-center z-50"
                     onClick={closeModal} // Закрытие модального окна при клике вне изображения
                 >
                     <div className="relative max-w-4xl mx-auto">
@@ -201,7 +201,7 @@ export default function FoBlock() {
                             transition={{duration: 0.3}}
                         />
                         <button
-                            className="absolute top-2 right-2 text-white text-xl bg-black bg-opacity-50 rounded-full p-2"
+                            className="absolute top-2 right-2 text-white text-xl  bg-opacity-50 rounded-full p-2"
                             onClick={closeModal} // Кнопка для закрытия модального окна
                         >
                             ✖

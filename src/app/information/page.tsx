@@ -5,7 +5,7 @@ import FoBlock from "@/components/ui/infoblock";
 
 export default function InformationPage() {
   return (
-    <main className="flex-1 py-8">
+    <main className="flex-1">
       <FoBlock />
     </main>
   )
