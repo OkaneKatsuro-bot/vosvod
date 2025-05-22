@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import GalleryBlock from '@/components/slideimg'
 import WhyVOSVOD from '@/components/ui/education'
+import CallButton from '@/components/button'
 
 export default function HovercraftPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -56,7 +57,7 @@ export default function HovercraftPage() {
         </div>
       )}
       {/* Content */}
-      <div className="space-y-10 max-w-7xl mx-auto px-4 py-16">
+      <div className="space-y-10 w-full mx-auto px-4 py-16">
         <section className="text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Чему вы научитесь</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -97,12 +98,6 @@ export default function HovercraftPage() {
   </p>
 
   <div className="mt-8 text-center">
-    <button
-      className="bg-blue-800 text-white text-lg font-semibold px-6 py-3 rounded-xl hover:bg-blue-700 transition"
-      onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-    >
-      Записаться на курс
-    </button>
   </div>
 </section>
 
@@ -156,9 +151,7 @@ export default function HovercraftPage() {
           </div>
 
           <div className="mt-8 text-center">
-            <Button className="bg-blue-800 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-lg">
-              Записаться на курс
-            </Button>
+          <CallButton/>
           </div>
         </section>
 

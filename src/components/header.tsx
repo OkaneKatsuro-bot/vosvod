@@ -72,7 +72,7 @@ export const Header = ({ isFixed = true }: { isFixed?: boolean }) => {
     { name: 'Коммерческие суда', path: '/commercsud' },
     { name: 'Прогулочные суда', path: '/progulochnye' },
     { name: 'Спасатели', path: '/spasately' },
-    { name: 'Водолазы', path: '/vodolaz' },
+    { name: 'Обучение водолазов, дайверов ', path: '/vodolaz' },
   ]
 
   const organizationItems = [

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import GalleryBlock from '@/components/slideimg'
 import WhyVOSVOD from '@/components/ui/education'
 import Image from 'next/image'
+import CallButton from '@/components/button'
 
 const SailingCoursePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -125,11 +126,7 @@ const SailingCoursePage = () => {
               ))}
             </tbody>
           </table>
-          <div className="text-center mt-6">
-            <Button className="bg-blue-800 text-white px-6 py-3 rounded-xl hover:bg-blue-700">
-              Записаться на курс
-            </Button>
-          </div>
+          <CallButton/>
         </div>
       </section>
 
