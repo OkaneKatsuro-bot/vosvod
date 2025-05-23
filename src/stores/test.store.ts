@@ -36,7 +36,7 @@ export const useTestsStore = create<TestsState>((set, get) => ({
     fetchCategories: async () => {
         set({loading: true, error: null});
         try {
-            const res = await fetch('https://vosvod-backend.onrender.com/api/tests/allCategories', {cache: 'no-store'});
+            const res = await fetch('/api/tests/allCategories', {cache: 'no-store'});
             if (!res.ok) throw new Error(`Error ${res.status}`);
             const data: QuizeCategory[] = await res.json();
             set({categories: data});
@@ -54,7 +54,7 @@ export const useTestsStore = create<TestsState>((set, get) => ({
     fetchQuizzesByCategory: async (categoryId) => {
         set({loading: true, error: null});
         try {
-            const res = await fetch(`https://vosvod-backend.onrender.com/api/tests/quizzesBycategory/${categoryId}`, {cache: 'no-store'});
+            const res = await fetch(`/api/tests/quizzesBycategory/${categoryId}`, {cache: 'no-store'});
             if (!res.ok) throw new Error(`Error ${res.status}`);
             const data: Quiz[] = await res.json();
             set({quizzes: data});
@@ -72,7 +72,7 @@ export const useTestsStore = create<TestsState>((set, get) => ({
     fetchQuestionsByQuiz: async (quizId) => {
         set({loading: true, error: null});
         try {
-            const res = await fetch(`https://vosvod-backend.onrender.com/api/tests/getQuestionsByQuizeId/${quizId}`, {cache: 'no-store'});
+            const res = await fetch(`/api/tests/getQuestionsByQuizeId/${quizId}`, {cache: 'no-store'});
             if (!res.ok) throw new Error(`Error ${res.status}`);
             const data: QuizeQuestion[] = await res.json();
             set({questions: data});
