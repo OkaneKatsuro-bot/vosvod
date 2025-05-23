@@ -2,97 +2,19 @@
 import React, {useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import {useRouter} from "next/navigation";
-// import {
-//     IconCode,
-//     IconBrandReact,
-//     IconBrandNodejs,
-//     IconDatabase,
-//     IconBrandTypescript,
-//     IconColorSwatch,
-//     IconUser,
-// } from "@tabler/icons-react";
 import {cn} from "@/lib/utils";
 import {getCategoriesAction} from "@/components/cabinet-components/action";
 import {isSuccess} from "@/api/lib/isSuccessGuard";
 import {QuizeCategory} from "@/types/quizeCategory.type";
-
-// interface Test {
-//     id: number;
-//     title: string;
-//     description: string;
-//     //category: string;
-//     createdAt: string;
-// }
-
-// const mockTests: Test[] = [
-//     {
-//         id: 1,
-//         title: "МОТОРНОЕ СУДНО ГИДРОЦИКЛ (ГИМС)",
-//         description: "Проверьте свои знания",
-//         //  category: "safety",
-//         createdAt: "2024-05-01",
-//     },
-//     {
-//         id: 2,
-//         title: "МИНТРАНС",
-//         description: "Проверьте свои знания",
-//         //  category: "navigation",
-//         createdAt: "2024-05-02",
-//     },
-//     {
-//         id: 3,
-//         title: "ПАРУСНЫЕ СУДА (ГИМС)",
-//         description: "Проверьте свои знания",
-//         // category: "legislation",
-//         createdAt: "2024-05-03",
-//     },
-//     {
-//         id: 4,
-//         title: "СУДА ОСОБОЙ КОНСТРУКЦИИ",
-//         description: "Проверьте свои знания",
-//         //category: "ship",
-//         createdAt: "2024-05-03",
-//     },
-//     {
-//         id: 5,
-//         title: "СПАСАТЕЛЬ ВОСВОД",
-//         description: "Проверьте свои знания",
-//         // category: "rescuer",
-//         createdAt: "2024-05-03",
-//     },
-// ];
-
-// const iconsMap: Record<string, React.ReactNode> = {
-//     technical: <IconCode className="h-5 w-5 text-[#009FE2]"/>,
-//     safety: <IconBrandReact className="h-5 w-5 text-[#009FE2]"/>,
-//     navigation: <IconBrandTypescript className="h-5 w-5 text-[#009FE2]"/>,
-//     legislation: <IconColorSwatch className="h-5 w-5 text-[#009FE2]"/>,
-//     equipment: <IconBrandNodejs className="h-5 w-5 text-[#009FE2]"/>,
-//     rescue: <IconDatabase className="h-5 w-5 text-[#009FE2]"/>,
-//     default: <IconUser className="h-5 w-5 text-[#009FE2]"/>,
-// };
+import {ProtectedLayout} from "@/components/sign-in-components/ProtectedLayout";
 
 export function LampDemo() {
     const router = useRouter();
-    // const [tests] = useState<Test[]>(mockTests);
     const [categories, setCategories] = useState<QuizeCategory[]>([]);
     const [loading] = useState(false);
     const [error] = useState<string | null>(null);
-
-    // useEffect(() => {
-    //   async function checkAuthHandle() {
-    //     const status = localStorage.getItem(`test-auth-${testId}`);
-    //     if (status === "granted") {
-    //       // TODO: провекрка токена с бека
-    //       console.log("Доступ к тесту подтвержден", testId);
-    //     } else {
-    //       // TODO: редирект на 403 страницу или алерт
-    //       console.warn("Нет доступа к тесту", testId);
-    //     }
-    //   }
-    //
-    //   checkAuthHandle();
-    // }, [testId]);
+    const [actCategory, setActCategory] = useState<QuizeCategory>();
+    const [isAuth, setAuth] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -112,17 +34,21 @@ export function LampDemo() {
     }, []);
 
     const handleCardClick = (title: string) => {
-        router.push(`/cabinet/${title}`);
+        const selected = categories.find(c => c.name === title);
+        if (selected) {
+            setActCategory(selected);
+        }
+        //
     };
-    //
-    // const getIcon = (category: string) => {
-    //     return iconsMap[category] || iconsMap.default;
-    // };
+
+
+    if (!isAuth && actCategory) {
+        return <ProtectedLayout {...actCategory} />;
+    }
 
     return (
         <div className="relative min-h-screen w-full bg-[#04314D] overflow-hidden">
             <div className="flex w-full flex-1 scale-y-100 items-center justify-center isolate z-0 pt-16">
-                {/* Анимации и градиенты */}
                 <motion.div
                     initial={{opacity: 0.5, width: "15rem"}}
                     whileInView={{opacity: 1, width: "30rem"}}
@@ -210,17 +136,11 @@ export function LampDemo() {
                                 )}
                             >
                                 <div className="flex items-center gap-3 mb-4">
-                                    {/*<div className="p-2 rounded-lg bg-[#009FE2]/10">*/}
-                                    {/*    {getIcon(test.category)}*/}
-                                    {/*</div>*/}
+
                                     <h3 className="text-xl font-semibold text-[#B6E8FF]">
                                         {test.name}
                                     </h3>
                                 </div>
-                                {/*<p className="text-[#75D8FF] flex-grow">{test.description}</p>*/}
-                                {/*<div className="mt-4 text-sm text-[#B6E8FF]/80">*/}
-                                {/*    Создано: {new Date(test.createdAt).toLocaleDateString()}*/}
-                                {/*</div>*/}
                             </motion.div>
                         ))}
                     </div>
