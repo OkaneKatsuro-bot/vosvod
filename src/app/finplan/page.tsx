@@ -15,7 +15,7 @@ const FinancialPlanPage = () => {
 
           <div className="mt-6 text-center">
             <Link
-              href="https://vosvod.spb.ru/wp-content/uploads/2023/02/CCE05032017_0fhd.pdf"
+              href="/education/CCE05032017_0fhd-4.pdf"
               target="_blank"
               className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-xl transition"
             >

@@ -28,7 +28,7 @@ export function RescueBentoGrid() {
                 "relative overflow-hidden border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 min-h-[400px]",
                 i === 3 ? "md:col-span-2" : ""
               )}
-              // Белый текст без затемнения
+              // Белый текст, затемнение отключено
               titleClass="relative z-10 text-white text-xl font-semibold group-hover/bento:text-blue-200 transition-colors"
               descriptionClass="relative z-10 text-white/90 mt-2 text-sm"
             />

@@ -22,13 +22,13 @@ export default function QuizCategoryPage() {
         setLoading(true);
         setError(null);
 
-        const url = `https://vosvod-backend.onrender.com/api/tests/quizzesBycategory/${encodeURIComponent(
+        const url = `http://localhost:4200/api/tests/quizzesBycategory/${encodeURIComponent(
             uriDecod
         )}`;
 
         (async () => {
             try {
-                const res = await fetch(url, {cache: 'no-store'});
+                const res = await fetch(url, {cache: 'no-store', credentials: 'include'});
                 if (!res.ok) {
                     throw new Error(`Сервер вернул ${res.status}`);
                 }
