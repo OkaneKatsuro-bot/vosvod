@@ -1,7 +1,7 @@
 "use client";
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 
 export default function FoBlock() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -13,6 +13,7 @@ export default function FoBlock() {
     const closeModal = () => {
         setSelectedImage(null);
     };
+
     const sections = [
         {
             id: 'about',
@@ -21,21 +22,14 @@ export default function FoBlock() {
                 <div className="space-y-10">
                     <p className="text-gray-700 leading-relaxed">
                         АНО ДПО «УЦС» является структурным подразделением ВОСВОД и осуществляет образовательную
-                        деятельность, направленную, прежде всего, на обеспечение безаварийной эксплуатации маломерных
-                        судов и безопасности людей на водных объектах с 2002 г., являясь продолжателем традиций
-                        преподавания советских морских школ ВОСВОД.
+                        деятельность с 2002 года, обеспечивая безопасность на водных объектах и подготовку экипажей.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
-                        АНО ДПО «УЦС» признана МИНТРАНС РФ МОРСКОЙ ОБРАЗОВАТЕЛЬНОЙ ОРГАНИЗАЦИЕЙ (Соглашение от
-                        04.07.2024 г. №10-38-17) и наделена полномочиями по подготовке экипажей морских судов в
-                        соответствии с Конвенцией ПНДВ. Система стандартов качества освидетельствована Российским
-                        морским регистром судоходства – Акт освидетельствования стандартов качества Российский морской
-                        регистр судоходства № 1840035 от 14.09.2018 г.
+                        Организация признана МИНТРАНС РФ и действует согласно Конвенции ПНДВ, а её стандарты
+                        подтверждены Российским морским регистром судоходства.
                     </p>
                     <p className="text-gray-700 leading-relaxed">
-                        Система менеджмента качества применительно к услугам в сфере образования соответствует
-                        требованиям стандарта: ГОСТ ISO9001-2015 (ISO 9001:2015) (решение экспертной комиссии №31248 от
-                        29 марта 2022 г. Номер в едином реестре системы №00031248И.)
+                        Система менеджмента качества сертифицирована по ГОСТ ISO9001-2015 (ISO 9001:2015).
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -49,17 +43,16 @@ export default function FoBlock() {
                             <motion.div
                                 key={index}
                                 className="overflow-hidden"
-                                whileHover={{scale: 1.05}}
-                                transition={{duration: 0.3}}
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <Image
                                     src={imageSrc}
-                                    alt={`Image ${index + 1}`}
+                                    alt={`Документ ${index + 1}`}
                                     width={400}
                                     height={200}
                                     className="rounded-xl w-full h-auto object-cover cursor-pointer"
-                                    priority
-                                    onClick={() => handleImageClick(imageSrc)} // Открытие картинки в модальном окне при клике
+                                    onClick={() => handleImageClick(imageSrc)}
                                 />
                             </motion.div>
                         ))}
@@ -102,7 +95,7 @@ export default function FoBlock() {
                         ].map((contact, idx) => (
                             <motion.div
                                 key={idx}
-                                whileHover={{scale: 1.02}}
+                                whileHover={{ scale: 1.02 }}
                                 className="bg-blue-50 p-6 rounded-lg relative overflow-hidden"
                             >
                                 <h4 className="font-bold text-blue-800 text-lg">{contact.title}</h4>
@@ -112,7 +105,7 @@ export default function FoBlock() {
                                     className="mt-3 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
                                 >
                                     <svg
-                                        className="w-5 h-5 mr-2 group-hover:animate-ring"
+                                        className="w-5 h-5 mr-2"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -127,128 +120,45 @@ export default function FoBlock() {
                     </div>
                 </div>
             )
-        },
-        {
-            id: 'how-to-get',
-            title: 'Как получить права ГИМС',
-            content: (
-                <div className="space-y-4">
-                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
-                        <p className="font-semibold text-yellow-800">
-                            Внимание! Остерегайтесь мошенников. Получить права ГИМС за несколько дней без обучения
-                            невозможно.
-                        </p>
-                    </div>
-
-                    <p className="text-gray-700">
-                        Получить права ГИМС можно в Учебном Центре ВОСВОД. Всю информацию можно узнать по
-                        телефону: {' '}
-                        <a
-                            href="tel:+79319787378"
-                            className="font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-                        >
-                            +7 (931) 978-73-78
-                        </a>.
-                    </p>
-
-                    <h4 className="font-bold text-lg mt-6 text-blue-900">Процесс получения прав:</h4>
-                    <ol className="list-decimal pl-6 space-y-2 text-gray-700">
-                        <li>Прохождение обучения по программе судоводителей</li>
-                        <li>Сдача внутреннего экзамена в школе</li>
-                        <li>Сдача экзамена в ГИМС</li>
-                        <li>Получение удостоверения судоводителя</li>
-                    </ol>
-                </div>
-            )
-        },
-        {
-            id: 'certification',
-            title: 'Аттестация судоводителей',
-            content: (
-                <div className="space-y-4">
-                    <p className="text-gray-700">
-                        Сдача экзамена проводится в Государственной Инспекции по маломерным судам МЧС России (ГИМС).
-                    </p>
-
-                    <div className="bg-blue-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-blue-800 text-lg">Процедура аттестации:</h4>
-                        <ul className="list-disc pl-6 space-y-2 mt-2 text-gray-700">
-                            <li>Экзамен в форме тестирования на компьютере</li>
-                            <li>Продолжительность около 2 часов</li>
-                            <li>В комиссии присутствует представитель ВОСВОД</li>
-                            <li>Проводится в заранее назначенный день</li>
-                        </ul>
-                    </div>
-                </div>
-            )
         }
     ];
 
     return (
-        <div className="w-full bg-white px-4 py-12 mt-16 relative"> {/* Увеличен верхний отступ mt-16 */}
-            {/* Модальное окно для изображения */}
+        <div className="bg-white w-full">
+            <div className="container mx-auto px-4 py-12">
+                {sections.map((section) => (
+                    <div key={section.id} id={section.id} className="mb-16">
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">{section.title}</h2>
+                        {section.content}
+                    </div>
+                ))}
+            </div>
+
             {selectedImage && (
                 <div
-                    className="fixed inset-0  bg-opacity-50 flex justify-center items-center z-50"
-                    onClick={closeModal} // Закрытие модального окна при клике вне изображения
+                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                    onClick={closeModal}
                 >
-                    <div className="relative max-w-4xl mx-auto">
-                        <motion.img
-                            src={selectedImage}
-                            alt="Selected"
-                            className="rounded-xl w-full h-auto"
-                            whileHover={{scale: 1.1}}
-                            transition={{duration: 0.3}}
-                        />
+                    <div
+                        className="relative max-w-4xl w-full px-4"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <button
-                            className="absolute top-2 right-2 text-white text-xl  bg-opacity-50 rounded-full p-2"
-                            onClick={closeModal} // Кнопка для закрытия модального окна
+                            onClick={closeModal}
+                            className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
                         >
-                            ✖
+                            &times;
                         </button>
+                        <Image
+                            src={selectedImage}
+                            alt="Modal image"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto rounded-lg"
+                        />
                     </div>
                 </div>
             )}
-            <motion.h2
-                initial={{opacity: 0, y: 20}}
-                animate={{opacity: 1, y: 0}}
-                className="text-3xl font-bold text-center text-blue-900 mb-12 relative"
-            >
-        <span className="relative z-10 px-4 bg-white">
-          Информация для судоводителей
-        </span>
-                <div className="absolute w-full h-1 bg-blue-100 top-1/2 transform -translate-y-1/2"></div>
-            </motion.h2>
-
-            <div className="space-y-6">
-                {sections.map((section) => (
-                    <motion.div
-                        key={section.id}
-                        initial={{opacity: 0, y: 20}}
-                        animate={{opacity: 1, y: 0}}
-                        transition={{duration: 0.3}}
-                        className="border border-blue-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow relative"
-                    >
-                        <motion.div
-                            whileHover={{scale: 1.01}}
-                            className="p-6 bg-blue-50 cursor-pointer flex items-center"
-                        >
-                            <h3 className="text-xl font-semibold text-blue-900">
-                                {section.title}
-                            </h3>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            className="p-6 bg-white"
-                        >
-                            {section.content}
-                        </motion.div>
-                    </motion.div>
-                ))}
-            </div>
         </div>
     );
-};
-
+}
