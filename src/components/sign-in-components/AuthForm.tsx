@@ -38,7 +38,7 @@ export function AuthForm({testTitle, onSuccessAction, onErrorAction}: AuthFormPr
         onErrorAction("");
 
         try {
-            const res = await fetch('http://localhost:4200/user/signin', {
+            const res = await fetch('https://vosvod-backend.onrender.com/user/signin', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
