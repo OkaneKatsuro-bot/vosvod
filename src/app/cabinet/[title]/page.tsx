@@ -22,7 +22,7 @@ export default function QuizCategoryPage() {
         setLoading(true);
         setError(null);
 
-        const url = `https://vosvod-backend.onrender.com/api/tests/quizzesBycategory/${encodeURIComponent(
+        const url = `/api/tests/quizzesBycategory/${encodeURIComponent(
             uriDecod
         )}`;
 
