@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation"; // <-- Импорт хука
 import { LifeBuoy, BookOpen, Clock, Award, Users, ListChecks } from "lucide-react";
 
 export function VOSVODCards() {
+  const router = useRouter(); // <-- Инициализация
+
   const iconsData = [
     { title: "20 лет опыта", icon: <Award className="w-8 h-8 text-blue-600" /> },
     { title: "95% с первого раза", icon: <ListChecks className="w-8 h-8 text-blue-600" /> },
@@ -22,17 +25,18 @@ export function VOSVODCards() {
             Учебный центр <span className="text-blue-600">ВОСВОД</span>
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-          АНО ДПО «УЦС» является структурным подразделением ВОСВОД и осуществляет образовательную деятельность, направленную, прежде всего, на обеспечение безаварийной эксплуатации маломерных судов и безопасности людей на водных объектах с 2002 г., являясь продолжателем традиций преподавания советских морских школ ВОСВОД.
+            АНО ДПО «УЦС» является структурным подразделением ВОСВОД и осуществляет образовательную деятельность, направленную, прежде всего, на обеспечение безаварийной эксплуатации маломерных судов и безопасности людей на водных объектах с 2002 г., являясь продолжателем традиций преподавания советских морских школ ВОСВОД.
           </p>
+
           {/* Призыв и кнопка */}
-<div className="mt-16 text-center space-y-4">
-  <button
-    onClick={() => alert("Переход на страницу центра ВОСВОД")}
-    className="mt-2 inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm md:text-base font-medium rounded-md transition-colors"
-  >
-    Узнать подробнее
-  </button>
-</div>
+          <div className="mt-16 text-center space-y-4">
+            <button
+              onClick={() => router.push("/information")} // <-- переход
+              className="mt-2 inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm md:text-base font-medium rounded-md transition-colors"
+            >
+              Узнать подробнее
+            </button>
+          </div>
         </div>
 
         {/* Иконки преимуществ */}
