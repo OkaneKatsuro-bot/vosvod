@@ -18,11 +18,8 @@ export async function fetcher<T = unknown>(
     const isDev = process.env.NODE_ENV === 'development';
 
 
-    const baseUrl = isDev
-        ? `http://localhost:4200${url}`
-        : ` https://vosvod-backend.onrender.com${url}`
 
-    const res = await fetch(baseUrl, {
+    const res = await fetch('https://vosvod-backend.onrender.com', {
         ...options,
         credentials: 'include',
         headers,
