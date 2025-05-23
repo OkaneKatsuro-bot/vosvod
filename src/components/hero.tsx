@@ -3,7 +3,6 @@
 import { FlipWords } from './ui/flip-words'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export const Hero = () => {
   const content = {
@@ -85,38 +84,27 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Правая часть — мобилка: статика, десктоп: слайдер */}
+      {/* Правая часть — мобилка: статика, десктоп: простая смена картинки */}
       <div className="block lg:hidden w-full h-[50vh] relative z-0">
-  <Image
-    src={content.images[0]}
-    alt="Изображение курса"
-    fill
-    quality={100}
-    className="object-cover"
-  />
-  <div className="absolute inset-0 bg-black/20" />
-</div>
+        <Image
+          src={content.images[0]}
+          alt="Изображение курса"
+          fill
+          quality={100}
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
       <div className="hidden lg:block w-full lg:w-1/2 h-full relative overflow-hidden z-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={content.images[currentImageIndex]}
-              alt="Картинка курса"
-              fill
-              quality={100}
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/20" />
-          </motion.div>
-        </AnimatePresence>
+        <Image
+          src={content.images[currentImageIndex]}
+          alt="Картинка курса"
+          fill
+          quality={100}
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
     </section>
   )
