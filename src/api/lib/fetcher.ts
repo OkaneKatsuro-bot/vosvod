@@ -19,7 +19,7 @@ export async function fetcher<T = unknown>(
 
 
 
-    const res = await fetch('https://vosvod-backend.onrender.com', {
+    const res = await fetch(`https://vosvod-backend.onrender.com${url}`, {
         ...options,
         credentials: 'include',
         headers,
