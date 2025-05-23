@@ -76,9 +76,12 @@ export const Hero = () => {
           <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 z-10">
             {content.description}
           </p>
-          <button className="mx-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full w-fit transition z-10">
-            {content.buttonText}
-          </button>
+          <a
+  href="tel:+79319787378"
+  className="mx-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full w-fit transition z-10"
+>
+  {content.buttonText}
+</a>
         </div>
       </div>
 
